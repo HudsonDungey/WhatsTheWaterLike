@@ -4,12 +4,14 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import classNames from 'classnames';
+import { 
+  australianStates
+  } from '~/lib/locations';
 import { motion, MotionProps } from 'framer-motion';
 
 const links = [
   { url: '/home', text: 'HOME' },
-  { url: '/forecast', text: 'FORECAST' },
-  { url: '/about', text: 'ABOUT' },
+  { url: '/forecast', text: 'FORECAST' }
 ];
 
 const Navbar = () => {
@@ -20,34 +22,41 @@ const Navbar = () => {
     setIsMenuOpen(false);
   }, [pathname]);
 
-  const commonClasses = `text-base font-bebas tracking-widest flex items-center py-2 px-4 relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-transparent hover:after:bg-primary transition-all duration-300 hover:text-primary`;
+  const commonClasses = `text-base font-bebas tracking-widest flex items-center relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-transparent hover:after:bg-primary transition-all duration-300 hover:text-primary`;
   
   const navLinkClasses = classNames(commonClasses, {
     'text-md after:bg-primary': pathname === '/home',
   });
 
   const expandedClasses = classNames(
-    'container flex items-center justify-between px-4 lg:px-10 py-6'
+    'w-screen flex items-center justify-between px-4 lg:px-10 py-6'
   );
 
   return (
     <header className="z-50 border-b border-gray-700 bg-gray-900 text-white">
       <nav className={expandedClasses}>
-        <div>
+        <div className="flex flex-row">
         <Link href="/" className="inline-block text-xl lg:text-2xl pr-[100px]">
         <h1 className="text-2xl hover:text-primary transition-colors duration-300 flex flex-row">
             Whats the water like?
           <img src="/images/wind.png" alt="logo" className="w-[30px] h-[30px] invert"/>
           </h1>
         </Link>
-        <input
-          type="text"
-          placeholder="Where are you going?"
-          className="w-full md:w-[300px] text-sm px-4 text-gray-900 placeholder-gray-500 bg-white border border-gray-300 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition duration-300 ease-in-out"
-        />
         </div>
-        <div>
+        <div className="flex items-end flex-col">
         <ul className="hidden lg:flex items-center gap-x-8">
+          {australianStates.map((link, index) => (
+            <li key={index}>
+              <Link
+                className="text-xs "
+                href={link.url}
+              >
+                {link.text}
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <ul className="hidden lg:flex items-center justify-center gap-x-8">
           {links.map((link, index) => (
             <li key={index}>
               <Link

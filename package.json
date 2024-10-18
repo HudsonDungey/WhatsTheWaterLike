@@ -14,7 +14,9 @@
     "next": "14.2.15",
     "react": "^18",
     "react-dom": "^18",
-    "sass": "^1.79.5"
+    "react-responsive-carousel": "^3.2.23",
+    "sass": "^1.79.5",
+    "swiper": "^11.1.14"
   },
   "devDependencies": {
     "@types/node": "^20",
