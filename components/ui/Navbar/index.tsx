@@ -62,7 +62,7 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="flex items-center flex-col">
-          <ul className="hidden lg:flex items-center gap-x-8">
+          <ul className="hidden lg:flex items-center gap-x-6">
             {australianStates.map((link, index) => (
               <li key={index}>
                 <Link
