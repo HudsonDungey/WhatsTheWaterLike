@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { LocationProvider } from "~/utils/LocationContext";
 import "./globals.css";
 import { Wrapper } from "~/components";
 
@@ -30,7 +31,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Wrapper>
-        {children}
+          <LocationProvider>
+            {children}
+          </LocationProvider>
         </Wrapper>
       </body>
     </html>

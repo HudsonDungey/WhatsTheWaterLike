@@ -268,6 +268,13 @@ export const australianStates = [
     { url: '/Tasmania', text: 'Tasmania' },
 ];
 
+export const activities = [
+    "Fishing",
+    "Boating",
+    "Jet-Skiing",
+    "Flying", 
+];
+
 
 export const australiaLocationsString = [
     "Sydney",          // New South Wales
