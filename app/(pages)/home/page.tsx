@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { useLocationContext } from '~/utils/LocationContext';
-import { HomeCarousel, WarningBox } from '~/components/screens';
+import { HomeCarousel, WarningBox, ShowWeather } from '~/components/screens';
 import {
   newSouthWales,
   northernTerritory,
@@ -39,6 +39,7 @@ const Home = () => {
   const [permissionRequested, setPermissionRequested] = useState<boolean>(false);
   const [locationPermissionGranted, setLocationPermissionGranted] = useState<boolean | null>(null);
   const [query, setQuery] = useState('');
+  const [ locationSet, setLocationSet ] = useState(false);
   const [filteredLocations, setFilteredLocations] = useState<string[]>([]);
 
   useEffect(() => {
@@ -100,7 +101,7 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen bg-blue-100 text-gray-900">
+    <div className="h-screen bg-blue-100 text-gray-900">
 
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -167,6 +168,7 @@ const Home = () => {
                 className="px-2 py-2 w-[350px] cursor-pointer text-white hover:bg-primary text-base"
                 onClick={() => {
                   setQuery(location);
+                  setLocationSet(true);
                   setFilteredLocations([]);
                 }}
               >
@@ -176,11 +178,10 @@ const Home = () => {
           </ul>
         )}
       </div>
-
-      <div className="grid grid-cols-12 pt-4">
-        <div className="col-start-9 col-span-3">
-          <WarningBox warnings={dummyWarnings} />
-        </div>
+      <div className="flex justify-center pt-[70px]">
+      {query && locationSet && (
+      <ShowWeather tide={"4m"} swell={"1m, 3s"} temp={"32 degrees c"} wind={"10kts"} location={query} />
+      )}
       </div>
     </div>
   );

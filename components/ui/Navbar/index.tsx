@@ -1,12 +1,15 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import { FaUserCircle } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 import classNames from 'classnames';
+import { Login } from '~/components/screens/Services';
 import { australianStates, activities } from '~/lib/locations';
 import { useLocationContext } from '~/utils/LocationContext';
 import { useActivityContext } from '~/utils/ActivityContext'; 
+import { useAccountContext } from '~/utils/AccountContext';
 import { motion, MotionProps } from 'framer-motion';
 
 const links = [
@@ -15,19 +18,29 @@ const links = [
 ];
 
 const Navbar = () => {
-  const { location } = useLocationContext();
+  const { account } = useAccountContext();
+  const { location } = useLocationContext()
   const { selectedActivity, setSelectedActivity } = useActivityContext();
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const router = useRouter(); 
 
   useEffect(() => {
     setIsMenuOpen(false);
   }, [pathname]);
 
+  const handleProfileClick = () => {
+    router.push('/profile');
+  };
+
   const toggleList = () => {
     setIsOpen(!isOpen);
   };
+
+  const handleAccountClick = () => 
+    setIsLoginModalOpen(prevState => !prevState);
 
   const handleActivitySelect = (activity: any) => {
     setSelectedActivity(activity);
@@ -113,8 +126,31 @@ const Navbar = () => {
               </ul>
             )}
           </div>
+          {account ? (
+            <button className="flex flex-col justify-center items-center" onClick={handleProfileClick}>
+              <FaUserCircle size={30} />
+              <span>{account.displayName}</span>
+            </button>
+          ) : (
+            <button onClick={handleAccountClick}>
+              <FaUserCircle size={30} />
+            </button>
+          )}
         </div>
       </nav>
+      {isLoginModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg relative">
+            <button
+              className="absolute top-2 right-2 text-black text-2xl"
+              onClick={handleAccountClick}
+            >
+              &times;
+            </button>
+            <Login handleAccountClick={handleAccountClick}/> 
+          </div>
+        </div>
+      )}
     </header>
   );
 };

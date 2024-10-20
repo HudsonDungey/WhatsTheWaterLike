@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import { LocationProvider } from "~/utils/LocationContext";
 import "./globals.css";
 import { Wrapper } from "~/components";
+import { AccountProvider } from "~/utils/AccountContext";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -29,12 +30,13 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      ><AccountProvider>
         <Wrapper>
           <LocationProvider>
             {children}
           </LocationProvider>
         </Wrapper>
+      </AccountProvider>
       </body>
     </html>
   );
