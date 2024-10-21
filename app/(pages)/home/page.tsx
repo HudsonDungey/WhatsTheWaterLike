@@ -101,8 +101,7 @@ const Home = () => {
   };
 
   return (
-    <div className="h-screen bg-blue-100 text-gray-900">
-
+    <div className="h-screen bg-baby-blue text-gray-900">
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg w-[90%] md:w-[400px]">

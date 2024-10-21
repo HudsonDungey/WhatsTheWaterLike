@@ -21,6 +21,6 @@
       "~/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "lib/firebaseConfig.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "lib/firebaseConfig.js", "lib/navbarMain.tsx"],
   "exclude": ["node_modules"]
 }

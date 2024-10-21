@@ -25,3 +25,22 @@ body {
     text-wrap: balance;
   }
 }
+
+.home-cards {
+  transition: background-color 0.3s ease, color 0.3s ease; 
+}
+
+.home-cards:hover{
+  background-color: #151515;
+  color: white; 
+}
+
+.home-cards:hover   .card-title{
+  color: white; 
+}
+
+
+.home-cards:hover .status {
+  color: inherit; 
+}
+

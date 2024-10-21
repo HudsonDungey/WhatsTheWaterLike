@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { Login } from '~/components/screens/Services';
 import { australianStates, activities } from '~/lib/locations';
+import { mainNav } from '~/lib/navbarMain';
 import { useLocationContext } from '~/utils/LocationContext';
 import { useActivityContext } from '~/utils/ActivityContext'; 
 import { useAccountContext } from '~/utils/AccountContext';
@@ -49,39 +50,39 @@ const Navbar = () => {
   const commonClasses = `text-base font-bebas tracking-widest flex items-center relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-transparent hover:after:bg-primary transition-all duration-300 hover:text-primary`;
 
   const navLinkClasses = classNames(commonClasses, {
-    'text-md after:bg-primary': pathname === '/home',
+    'after:bg-primary hover:text-primary': pathname === '/home',
+  });
+
+  const activeClass = classNames('', {
+    'text-primary after:text-black bg-lemon-yellow hover:text-lemon-yellow p-2 border-black rounded-3xl text-black': pathname === '/home',
   });
 
   const expandedClasses = classNames(
-    'w-screen flex items-center justify-between px-4 lg:px-10 py-6'
+    'w-screen flex items-center px-4 lg:px-10 py-6'
   );
 
   return (
-    <header className="z-50 border-b border-gray-700 bg-gray-900 text-white">
+    <header className="z-50 bg-baby-blue text-white">
       <nav className={expandedClasses}>
         <div className="flex flex-row">
           <Link href="/" className="inline-block text-xl lg:text-2xl pr-[100px]">
-            <h1 className="text-2xl hover:text-primary transition-colors duration-300 flex flex-row">
+            <h1 className="text-xl font-bold text-black hover:text-primary transition-colors duration-300 flex flex-row">
+            <img src="/images/wind.png" alt="logo" className="w-[30px] h-[30px] pr-1 invert" />
               Whats the water like?
-              <img src="/images/wind.png" alt="logo" className="w-[30px] h-[30px] invert" />
             </h1>
-            {location ? (
-              <p className="text-base">
-                Your location is: Latitude {location.latitude}, Longitude {location.longitude}
-              </p>
-            ) : (
-              <p className="text-base">Location not available</p>
-            )}
           </Link>
         </div>
-        <div className="flex items-center flex-col">
-          <ul className="hidden lg:flex items-center gap-x-8">
-            {australianStates.map((link, index) => (
+        <div>
+        <ul className="hidden bg-black lg:flex h-full items-center justify-center border-black rounded-3xl py-[10px] px-[40px] gap-x-[40px]">
+            {mainNav.map((link, index) => (
               <li key={index}>
                 <Link
-                  className="text-xs"
+                  className={`${navLinkClasses} ${
+                    link.url === pathname && activeClass
+                  }`}
                   href={link.url}
                 >
+                  <span className="text-xl pr-2">{link.icon}</span>
                   {link.text}
                 </Link>
               </li>
@@ -89,22 +90,10 @@ const Navbar = () => {
           </ul>
         </div>
 
-        <div className="flex gap-x-3 md:gap-x-6 text-[20px] w-[200px] justify-end font-bebas">
+        <div className="flex gap-x-3 items-center md:gap-x-6 text-[20px] w-[430px] justify-end font-bebas">
           <div className="relative">
-            <ul className="hidden lg:flex items-center justify-center gap-x-8">
-              {links.map((link, index) => (
-                <li key={index}>
-                  <Link
-                    className={navLinkClasses}
-                    href={link.url}
-                  >
-                    {link.text}
-                  </Link>
-                </li>
-              ))}
-            </ul>
             <button
-              className="border border-black bg-gray-700 w-[200px] text-white px-6 py-1 rounded-md shadow-black"
+              className="border border-transparent font-bold bg-light-baby-blue w-[200px] text-black px-6 py-1 rounded-md shadow-black"
               onClick={toggleList}
             >
               {selectedActivity ? selectedActivity : 'Select Activity'}
@@ -116,7 +105,7 @@ const Navbar = () => {
                     key={index}
                     onClick={() => {
                       handleActivitySelect(activity);
-                      setIsOpen(false); // Close the dropdown when an activity is selected
+                      setIsOpen(false); 
                     }}
                     className="px-4 py-2 hover:bg-gray-700 rounded-md text-white cursor-pointer"
                   >
@@ -126,16 +115,18 @@ const Navbar = () => {
               </ul>
             )}
           </div>
+          <div className="w-[100px]">
           {account ? (
             <button className="flex flex-col justify-center items-center" onClick={handleProfileClick}>
-              <FaUserCircle size={30} />
+              <FaUserCircle size={30} className="invert"/>
               <span>{account.displayName}</span>
             </button>
           ) : (
             <button onClick={handleAccountClick}>
-              <FaUserCircle size={30} />
+              <FaUserCircle size={30} className="invert"/>
             </button>
           )}
+          </div>
         </div>
       </nav>
       {isLoginModalOpen && (
