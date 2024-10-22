@@ -118,8 +118,11 @@ const Navbar = () => {
           <div className="w-[100px]">
           {account ? (
             <button className="flex flex-col justify-center items-center" onClick={handleProfileClick}>
-              <FaUserCircle size={30} className="invert"/>
-              <span>{account.displayName}</span>
+              {account.photoURL ? (
+                <img src={account.photoURL} alt="Profile" className="w-8 h-8 rounded-full" />
+              ) : (
+                <FaUserCircle size={30} className="invert" />
+              )}
             </button>
           ) : (
             <button onClick={handleAccountClick}>
