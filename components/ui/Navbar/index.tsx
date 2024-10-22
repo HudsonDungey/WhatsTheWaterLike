@@ -53,12 +53,12 @@ const Navbar = () => {
     'after:bg-primary hover:text-primary': pathname === '/home',
   });
 
-  const activeClass = classNames('', {
-    'text-primary after:text-black bg-lemon-yellow hover:text-lemon-yellow p-2 border-black rounded-3xl text-black': pathname === '/home',
-  });
+  const activeClass = classNames(
+    'text-primary after:text-black bg-lemon-yellow p-2 border-black rounded-3xl text-black'
+  );  
 
   const expandedClasses = classNames(
-    'w-screen flex items-center px-4 lg:px-10 py-6'
+    'w-screen flex items-center px-4 lg:px-10 py-6 shadow-lg'
   );
 
   return (
@@ -66,7 +66,7 @@ const Navbar = () => {
       <nav className={expandedClasses}>
         <div className="flex flex-row">
           <Link href="/" className="inline-block text-xl lg:text-2xl pr-[100px]">
-            <h1 className="text-xl font-bold text-black hover:text-primary transition-colors duration-300 flex flex-row">
+            <h1 className="text-xl text-black hover:text-primary transition-colors duration-300 flex flex-row">
             <img src="/images/wind.png" alt="logo" className="w-[30px] h-[30px] pr-1 invert" />
               Whats the water like?
             </h1>

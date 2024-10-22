@@ -47,106 +47,96 @@ export const Login = ({ handleAccountClick }: LoginTypes) => {
     }
   };
 
-  // Render Form
   return (
-    <div className="flex flex-col items-center justify-center bg-gray-100 p-4">
+    <div className="flex flex-col w-screen h-screen items-center bg-gray-100 p-4">
+      <div className="w-3/12 pt-[100px]">
+      <button className="text-black text-5xl text-right w-full" onClick={handleAccountClick}>X</button>
+      </div>
       {step === 'initial' && (
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <h2 className="text-xl font-bold mb-4 text-center">Welcome!</h2>
-          <p className="text-center mb-4">Please select an option below:</p>
-          <div className="flex justify-center space-x-4">
+        <div className="p-6 rounded-lg shadow-sm h-[450px]">
+          <div className=" flex flex-col justify-center items-center">
+          <h2 className="text-4xl text-black font-bold mb-4 text-center">Log In!</h2>
+          <div className="flex flex-row gap-2">
+          <h2 className="text-base text-gray-800"> New to the site? </h2> 
             <button
-              className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
-              onClick={() => setStep('login')}
-            >
-              Log In
-            </button>
-            <button
-              className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
+              className="text-black text-base underline"
               onClick={() => setStep('signup')}
             >
               Sign Up
             </button>
-          </div>
-        </div>
-      )}
-
-      {step === 'login' && (
-        <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-sm">
-          <h2 className="text-2xl font-bold mb-4 text-center">Log In</h2>
+            </div>
+            </div>
+          <div className="flex flex-col items-center justify-center w-[300px]">
+          <div className="flex flex-col w-full items-start justify-start">
+          <h1 className="text-black text-base pb-[5px]">Email<span className="text-gray-400 pl-[2px]">*</span></h1>
           <input
             type="email"
             placeholder="Email"
-            className="mb-4 p-2 w-full border rounded text-black"
+            className="mb-4 p-2 w-full border rounded text-black text-base"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+          </div>
+          <div className="flex flex-col w-full items-start justify-start">
+          <h1 className="text-black text-base pb-[5px]">Password<span className="text-gray-400 pl-[2px]">*</span></h1>
           <input
             type="password"
             placeholder="Password"
-            className="mb-4 p-2 w-full border rounded text-black"
+            className="mb-4 p-2 w-full border rounded text-black text-base"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          </div>
           <button
-            className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+            className="w-[300px] text-white text-base bg-black py-2 px-3 mt-[50px]"
             onClick={handleSignIn}
           >
             Log In
           </button>
-          <button
-            className="mt-4 text-sm text-blue-500 hover:underline"
-            onClick={() => setStep('initial')}
-          >
-            Go Back
-          </button>
+          </div>
         </div>
       )}
 
       {step === 'signup' && (
-        <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-sm">
-          <h2 className="text-2xl font-bold mb-4 text-center">Sign Up</h2>
-          <input
-            type="email"
-            placeholder="Email"
-            className="mb-4 p-2 w-full border rounded"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+        <div className="bg-white p-6 flex flex-col justify-center items-center rounded-lg shadow-md w-[400px] max-w-sm">
+          <h2 className="text-2xl mb-4 text-center text-black">Sign Up</h2>
+          <div className="flex flex-col items-start w-[300px] justify-start">
+          <h1 className="text-black text-base pb-[5px]">Username<span className="text-gray-400 pl-[2px]">*</span></h1>
           <input
             type="text"
             placeholder="Username"
-            className="mb-4 p-2 w-full border rounded"
+            className="mb-4 p-2 w-full border rounded text-black text-base"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
+          </div>
+          <div className="flex flex-col items-start w-[300px] justify-start">
+          <h1 className="text-black text-base pb-[5px]">Email<span className="text-gray-400 pl-[2px]">*</span></h1>
+          <input
+            type="email"
+            placeholder="Email"
+            className="mb-4 p-2 w-full border rounded text-black text-base"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          </div>
+          <div className="flex flex-col w-[300px] items-start justify-start">
+          <h1 className="text-black text-base pb-[5px]">Password<span className="text-gray-400 pl-[2px]">*</span></h1>
           <input
             type="password"
             placeholder="Password"
-            className="mb-4 p-2 w-full border rounded"
+            className="mb-4 p-2 w-full border rounded text-black text-base"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <input
-            type="text"
-            placeholder="Profile Picture URL"
-            className="mb-4 p-2 w-full border rounded"
-            value={photoURL}
-            onChange={(e) => setPhotoURL(e.target.value)}
-          />
+          </div>
           <button
-            className="w-full bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
-            onClick={handleSignUp}
+            className="w-[300px] text-white text-base bg-black py-2 px-3 mt-[50px]"
+            onClick={handleSignIn}
           >
-            Sign Up
+            Log In
           </button>
-          <button
-            className="mt-4 text-sm text-blue-500 hover:underline"
-            onClick={() => setStep('initial')}
-          >
-            Go Back
-          </button>
-        </div>
+          </div>
       )}
 
       {error && <p className="text-red-500 mt-4">{error.toString()}</p>}
