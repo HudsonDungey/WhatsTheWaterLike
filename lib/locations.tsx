@@ -1,3 +1,5 @@
+
+
 export const newSouthWales = [
     "Bondi Beach",
     "Byron Bay",
@@ -266,13 +268,6 @@ export const australianStates = [
     { url: '/Victoria', text: 'Victoria' },
     { url: '/Queensland', text: 'Queensland' },
     { url: '/Tasmania', text: 'Tasmania' },
-];
-
-export const activities = [
-    "Fishing",
-    "Boating",
-    "Jet-Skiing",
-    "Flying", 
 ];
 
 

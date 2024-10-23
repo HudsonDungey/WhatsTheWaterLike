@@ -48,7 +48,7 @@ export const MainProfileScreen = ({ account, setStep }: MainProfileScreenTypes) 
         <div className="bg-white shadow-lg rounded-2xl p-8 max-w-md h-[500px] w-full"> 
           <div className="flex justify-center items-center flex-col mb-2">
           {account.photoURL ? (
-                <img src={account.photoURL} alt="Profile" className="w-8 h-8 rounded-full" />
+                <img src={account.photoURL} alt="Profile" className="w-[80px] h-[80px] rounded-full" />
               ) : (
                 <FaUserCircle size={30} className="invert" />
               )}

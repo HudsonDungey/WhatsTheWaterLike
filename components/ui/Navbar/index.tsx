@@ -1,21 +1,30 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { FaUserCircle } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
+import { GiFishing, GiHelicopter } from 'react-icons/gi';
+import { IoBoatSharp } from 'react-icons/io5';
+import JetSkiIcon from '~/public/images/jetski.png';
 import classNames from 'classnames';
 import { Login } from '~/components/screens/Services';
-import { australianStates, activities } from '~/lib/locations';
 import { mainNav } from '~/lib/navbarMain';
 import { useLocationContext } from '~/utils/LocationContext';
 import { useActivityContext } from '~/utils/ActivityContext'; 
 import { useAccountContext } from '~/utils/AccountContext';
-import { motion, MotionProps } from 'framer-motion';
 
 const links = [
   { url: '/home', text: 'HOME' },
   { url: '/forecast', text: 'FORECAST' }
+];
+
+const activities = [
+  { name: 'Fishing', icon: <GiFishing /> },
+  { name: 'Boating', icon: <IoBoatSharp /> },
+  { name: 'Jet Skiing', icon: <Image src={JetSkiIcon} alt="Jet Ski" width={25} height={25} />},
+  { name: 'Helicopter Ride', icon: <GiHelicopter /> },
 ];
 
 const Navbar = () => {
@@ -90,26 +99,26 @@ const Navbar = () => {
           </ul>
         </div>
 
-        <div className="flex gap-x-3 items-center md:gap-x-6 text-[20px] w-[430px] justify-end font-bebas">
+        <div className="flex gap-x-3 items-center md:gap-x-6 text-[20px] w-[420px] justify-end font-bebas">
           <div className="relative">
             <button
-              className="border border-transparent font-bold bg-light-baby-blue w-[200px] text-black px-6 py-1 rounded-md shadow-black"
+              className="border border-transparent font-bold bg-light-baby-blue text-center text-black px-[14px] py-1 rounded-md shadow-black"
               onClick={toggleList}
             >
-              {selectedActivity ? selectedActivity : 'Select Activity'}
+              {selectedActivity ? selectedActivity : '?'}
             </button>
             {isOpen && (
-              <ul className="absolute mt-2 w-[200px] bg-black bg-opacity-80 rounded-md shadow-lg z-100">
+              <ul className="absolute mt-2 w-[50px] bg-black bg-opacity-80 rounded-md shadow-lg z-100">
                 {activities.map((activity, index) => (
                   <li
                     key={index}
                     onClick={() => {
-                      handleActivitySelect(activity);
-                      setIsOpen(false); 
+                      handleActivitySelect(activity.icon);
+                      setIsOpen(false);
                     }}
-                    className="px-4 py-2 hover:bg-gray-700 rounded-md text-white cursor-pointer"
+                    className="px-4 py-2 hover:bg-gray-700 text-lg rounded-md text-white cursor-pointer flex items-center space-x-2"
                   >
-                    {activity}
+                    {activity.icon}
                   </li>
                 ))}
               </ul>
