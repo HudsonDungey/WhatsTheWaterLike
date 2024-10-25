@@ -1,15 +1,16 @@
 'use client';
-import React, { useState } from 'react';
-import MapGL, { ViewStateChangeEvent } from 'react-map-gl';
+import React, { useState, useEffect } from 'react';
+import MapGL, { ViewStateChangeEvent, Marker } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css'; 
-
-const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_API; 
+import { addFishingSpot, getFishingSpots } from '~/lib/fishingLocations';
+import { FishingSpot } from '~/types/mainTypes';
 
 const Map = () => {
     const [query, setQuery] = useState('');  
     const [searchResults, setSearchResults] = useState<any[]>([]);  
     const [showLatitude, setShowLatitude] = useState(-12.4578); 
     const [showLongitude, setShowLongitude] = useState(130.8334); 
+    const [fishingSpots, setFishingSpots] = useState<FishingSpot[]>([]);
 
     const [options, setOptions] = useState({
         showRadar: false,
@@ -24,6 +25,17 @@ const Map = () => {
         bearing: 0,
         pitch: 0,
     });
+
+    const fetchFishingSpots = async () => {
+        const spots = await getFishingSpots();
+        if(spots){
+        setFishingSpots(spots);
+        }
+      };
+    
+      useEffect(() => {
+        fetchFishingSpots();
+      }, []);
 
     const handleViewportChange = (event: ViewStateChangeEvent) => {
         setViewport(event.viewState);
@@ -44,7 +56,7 @@ const Map = () => {
         if (input.length > 2) {
             console.log("getting location");
             const res = await fetch(
-                `https://api.mapbox.com/geocoding/v5/mapbox.places/${input}.json?proximity=-25.2744,88.7751&country=AU&access_token=${MAPBOX_TOKEN}`
+                `https://api.mapbox.com/geocoding/v5/mapbox.places/${input}.json?proximity=-25.2744,88.7751&country=AU&access_token=${process.env.NEXT_PUBLIC_MAPBOX_API}`
             );
             const data = await res.json();
             console.log(data);
@@ -138,9 +150,19 @@ const Map = () => {
                 <MapGL
                   {...viewport}
                   mapStyle="mapbox://styles/mapbox/satellite-v9"
-                  mapboxAccessToken={MAPBOX_TOKEN}
+                  mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_API}
                   onMove={handleViewportChange}
                 >
+                    {fishingSpots.map((spot) => (
+                      <Marker
+                        key={spot.id}
+                        longitude={spot.location.lng}
+                        latitude={spot.location.lat}
+                        anchor="bottom" 
+                      >
+                        <div style={{ background: '#007cbf', borderRadius: '50%', width: '10px', height: '10px' }} />
+                      </Marker>
+                    ))}
                     {/* {options.showRadar && <RadarLayer />} */}
                     {/* {options.showFishingSpots && <FishingSpotsLayer />} */}
                     {/* {options.showRoughPatches && <RoughPatchesLayer />} */}

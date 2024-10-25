@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import { LocationProvider } from "~/utils/LocationContext";
 import "./globals.css";
 import { Wrapper } from "~/components";
+import 'mapbox-gl/dist/mapbox-gl.css';
 import { AccountProvider } from "~/utils/AccountContext";
 
 const geistSans = localFont({

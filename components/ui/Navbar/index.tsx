@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { FaUserCircle } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
-import { GiFishing, GiHelicopter } from 'react-icons/gi';
+import { GiFishing, GiHelicopter, GiWaveSurfer } from 'react-icons/gi';
 import { IoBoatSharp } from 'react-icons/io5';
 import JetSkiIcon from '~/public/images/jetski.png';
 import classNames from 'classnames';
@@ -24,7 +24,8 @@ const activities = [
   { name: 'Fishing', icon: <GiFishing /> },
   { name: 'Boating', icon: <IoBoatSharp /> },
   { name: 'Jet Skiing', icon: <Image src={JetSkiIcon} alt="Jet Ski" width={25} height={25} />},
-  { name: 'Helicopter Ride', icon: <GiHelicopter /> },
+  { name: 'Flying', icon: <GiHelicopter /> },
+  { name: 'Surfing', icon: <GiWaveSurfer />}
 ];
 
 const Navbar = () => {
