@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { FaMapMarkerAlt } from 'react-icons/fa';
 import { FaUserCircle } from 'react-icons/fa';
 import { ImLocation2 } from "react-icons/im";
 import { addFishingSpot, getFishingSpots } from '~/lib/fishingLocations';
@@ -191,6 +192,16 @@ export const MainProfileScreen = ({ account, setStep }: MainProfileScreenTypes) 
                 <ImLocation2 size={30} color="red" />
               </Marker>
             )}
+            {showSpots && fishingSpots.map((spot) => (
+                      <Marker
+                        key={spot.id}
+                        longitude={spot.location.lng}
+                        latitude={spot.location.lat}
+                        anchor="bottom" 
+                      >
+                        <FaMapMarkerAlt color="red" size={32} />
+                      </Marker>
+                    ))}
           </MapGL>
         </div>
       </div>

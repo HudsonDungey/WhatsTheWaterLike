@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import MapGL, { ViewStateChangeEvent, Marker } from 'react-map-gl';
+import { FaMapMarkerAlt } from "react-icons/fa";
 import 'mapbox-gl/dist/mapbox-gl.css'; 
 import { addFishingSpot, getFishingSpots } from '~/lib/fishingLocations';
 import { FishingSpot } from '~/types/mainTypes';
@@ -160,7 +161,7 @@ const Map = () => {
                         latitude={spot.location.lat}
                         anchor="bottom" 
                       >
-                        <div style={{ background: '#007cbf', borderRadius: '50%', width: '10px', height: '10px' }} />
+                        <FaMapMarkerAlt color="red" size={32} />
                       </Marker>
                     ))}
                     {/* {options.showRadar && <RadarLayer />} */}

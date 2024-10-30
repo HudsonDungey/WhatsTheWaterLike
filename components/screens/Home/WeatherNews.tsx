@@ -6,9 +6,9 @@ export const WeatherNews = () => {
 
       <div className="flex flex-col items-center w-full md:w-1/2">
         <img
-          src="http://www.bom.gov.au/radar/IDR023.gif" 
+          src="/images/australia-radar-map.png" 
           alt="Weather Radar"
-          className="w-full h-64 object-cover rounded-lg shadow-md"
+          className="w-full object-cover rounded-lg shadow-md"
         />
         <span className="text-sm text-gray-500 mt-2">Live Weather Radar (BoM)</span>
       </div>
@@ -17,7 +17,7 @@ export const WeatherNews = () => {
         <img
           src="/images/news.jpg" 
           alt="Latest News"
-          className="w-full h-64 object-cover rounded-lg shadow-md"
+          className="w-full object-cover rounded-lg shadow-md"
         />
         <span className="text-sm text-gray-500 mt-2">Latest News</span>
       </div>
