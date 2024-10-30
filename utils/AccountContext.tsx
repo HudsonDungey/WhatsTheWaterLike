@@ -1,12 +1,6 @@
-'use client'
+'use client';
 import { createContext, useState, useContext, ReactNode } from 'react';
-
-interface AccountDetails {
-  uid: string;
-  email: string | null;
-  displayName: string | null;
-  photoURL?: string | null;
-}
+import { AccountDetails } from '~/types/mainTypes';
 
 interface AccountContextType {
   account: AccountDetails | null;
@@ -26,6 +20,7 @@ export const useAccountContext = (): AccountContextType => {
 
 export const AccountProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [account, setAccount] = useState<AccountDetails | null>(null);
+
   const clearAccount = () => setAccount(null);
 
   return (
@@ -34,3 +29,4 @@ export const AccountProvider: React.FC<{ children: ReactNode }> = ({ children })
     </AccountContext.Provider>
   );
 };
+

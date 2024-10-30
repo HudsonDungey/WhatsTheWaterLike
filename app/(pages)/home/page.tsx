@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { useLocationContext } from '~/utils/LocationContext';
-import { HomeCarousel, WarningBox, ShowWeather } from '~/components/screens';
+import { HomeCarousel, WarningBox, ShowWeather, PlanBar, Activities, WeatherNews } from '~/components/screens';
 import {
   newSouthWales,
   northernTerritory,
@@ -41,6 +41,10 @@ const Home = () => {
   const [query, setQuery] = useState('');
   const [ locationSet, setLocationSet ] = useState(false);
   const [filteredLocations, setFilteredLocations] = useState<string[]>([]);
+  const [location, setGoToLocation] = useState('');
+  const [arrivalTime, setArrivalTime] = useState('');
+  const [departureTime, setDepartureTime] = useState('');
+  const [activity, setActivity] = useState('');
 
   useEffect(() => {
     const savedLocation = localStorage.getItem('userLocation');
@@ -101,7 +105,7 @@ const Home = () => {
   };
 
   return (
-    <div className="h-screen bg-baby-blue text-gray-900">
+    <div className="text-gray-900 bg-gray-50">
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg w-[90%] md:w-[400px]">
@@ -146,11 +150,23 @@ const Home = () => {
           </div>
         </div>
       )}
-
+      
       <div className="w-screen px-10 pt-10">
+        <div className="p-4 flex w-full justify-center items-center">
+          <PlanBar
+            location={location}
+            setLocation={setGoToLocation}
+            arrivalTime={arrivalTime}
+            setArrivalTime={setArrivalTime}
+            departureTime={departureTime}
+            setDepartureTime={setDepartureTime}
+            activity={activity}
+            setActivity={setActivity}
+          />
+        </div>
         <HomeCarousel />
       </div>
-
+    {/* 
       <div className="flex flex-col items-center">
         <input
           type="text"
@@ -177,12 +193,19 @@ const Home = () => {
           </ul>
         )}
       </div>
-      <div className="flex justify-center pt-[70px]">
-      {query && locationSet && (
-      <ShowWeather tide={"4m"} swell={"1m, 3s"} temp={"32 degrees c"} wind={"10kts"} location={query} />
-      )}
+     <div className="flex justify-center pt-[70px]">
+       {query && locationSet && (
+         <ShowWeather tide={"4m"} swell={"1m, 3s"} temp={"32 degrees c"} wind={"10kts"} location={query} />
+       )}
+     </div> 
+     */}
+      <div className="min-h-[500px]">
+       <Activities/>
+       </div>
+       <div className="min-h-[500px]">
+       <WeatherNews/>
+       </div>
       </div>
-    </div>
   );
 };
 

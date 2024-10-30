@@ -30,7 +30,7 @@ const activities = [
 
 const Navbar = () => {
   const { account } = useAccountContext();
-  const { location } = useLocationContext()
+  const { location } = useLocationContext();
   const { selectedActivity, setSelectedActivity } = useActivityContext();
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -64,26 +64,27 @@ const Navbar = () => {
   });
 
   const activeClass = classNames(
-    'text-primary after:text-black bg-lemon-yellow p-2 border-black rounded-3xl text-black'
+    'text-primary after:text-red-600 p-2 border-black rounded-3xl text-red-800'
   );  
 
   const expandedClasses = classNames(
-    'w-screen flex items-center px-4 lg:px-10 py-6 shadow-lg'
+    'w-screen flex items-center px-4 lg:px-1 py-3 shadow-lg'
   );
 
   return (
-    <header className="z-50 bg-baby-blue text-white">
+    <header className="z-50 bg-white text-white">
       <nav className={expandedClasses}>
         <div className="flex flex-row">
           <Link href="/" className="inline-block text-xl lg:text-2xl pr-[100px]">
-            <h1 className="text-xl text-black hover:text-primary transition-colors duration-300 flex flex-row">
-            <img src="/images/wind.png" alt="logo" className="w-[30px] h-[30px] pr-1 invert" />
+            <h1 className="text-xl text-black font-bold hover:text-primary transition-colors duration-300 flex flex-row">
+              <img src="/images/wind.png" alt="logo" className="w-[30px] h-[30px] pr-1 invert" />
               Whats the water like?
             </h1>
           </Link>
         </div>
-        <div>
-        <ul className="hidden bg-black lg:flex h-full items-center justify-center border-black rounded-3xl py-[10px] px-[40px] gap-x-[40px]">
+        
+        <div className="flex-1">
+          <ul className="hidden text-start lg:flex h-full items-center justify-start rounded-3xl text-black py-[10px] px-[10px] gap-x-[40px]">
             {mainNav.map((link, index) => (
               <li key={index}>
                 <Link
@@ -100,10 +101,10 @@ const Navbar = () => {
           </ul>
         </div>
 
-        <div className="flex gap-x-3 items-center md:gap-x-6 text-[20px] w-[420px] justify-end font-bebas">
+        <div className="flex gap-x-3 items-center md:gap-x-6 text-[20px] w-auto ml-auto pr-4">
           <div className="relative">
             <button
-              className="border border-transparent font-bold bg-light-baby-blue text-center text-black px-[14px] py-1 rounded-md shadow-black"
+              className="border border-transparent font-bold text-center text-black px-[14px] py-1 rounded-md shadow-black"
               onClick={toggleList}
             >
               {selectedActivity ? selectedActivity : '?'}
@@ -125,23 +126,25 @@ const Navbar = () => {
               </ul>
             )}
           </div>
-          <div className="w-[100px]">
-          {account ? (
-            <button className="flex flex-col justify-center items-center" onClick={handleProfileClick}>
-              {account.photoURL ? (
-                <img src={account.photoURL} alt="Profile" className="w-8 h-8 rounded-full" />
-              ) : (
-                <FaUserCircle size={30} className="invert" />
-              )}
-            </button>
-          ) : (
-            <button onClick={handleAccountClick}>
-              <FaUserCircle size={30} className="invert"/>
-            </button>
-          )}
+
+          <div>
+            {account ? (
+              <button className="flex flex-col justify-center items-center" onClick={handleProfileClick}>
+                {account.photoURL ? (
+                  <img src={account.photoURL} alt="Profile" className="w-8 h-8 rounded-full" />
+                ) : (
+                  <FaUserCircle size={30} className="invert" />
+                )}
+              </button>
+            ) : (
+              <button onClick={handleAccountClick}>
+                <FaUserCircle size={30} className="invert"/>
+              </button>
+            )}
           </div>
         </div>
       </nav>
+
       {isLoginModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg relative">

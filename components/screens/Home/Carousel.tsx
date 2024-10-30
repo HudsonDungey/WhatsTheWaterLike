@@ -6,6 +6,8 @@ import 'swiper/css/autoplay';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import { TiWeatherPartlySunny } from "react-icons/ti";
+import { FaStar, FaRegStar } from 'react-icons/fa';
 import { Line } from 'react-chartjs-2'; // Import Line chart from react-chartjs-2
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 import 'chart.js/auto';
@@ -13,77 +15,43 @@ import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import { australiaLocationsString, northernTerritory } from '~/lib/locations';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
-
-const upcomingWeatherData = {
-  labels: ['Now', '2pm', '4pm', '6pm', '8pm'], 
-  datasets: [
-    {
-      label: 'Temperature (°C)', 
-      data: [22, 24, 21, 23, 25],
-      fill: false,
-      borderColor: 'rgb(75, 192, 192)',
-      tension: 0.1, 
-    },
-  ],
-};
+const weatherScore = 46
+const starCount = Math.round(weatherScore / 20);
 
 export const HomeCarousel: React.FC = () => {
-  const status = "good"; 
 
   return (
-    <div>
-      <h1 className="text-black text-4xl font-bold text-start pb-2">Current Conditions</h1>
-      <h1 className="text-gray-500 text-base text-start pb-4">Get to know what is going on, without being a meteorologist.</h1>
+    <div className="space-y-1 pt-5">
+    
       {/* First Swiper */}
       <Swiper
-        spaceBetween={30}
+        spaceBetween={5}
         centeredSlides={false}
         loop={true}
-        slidesPerView={4}
+        slidesPerView={5}
         modules={[Autoplay, Pagination, Navigation]}
-        className="max-h-[300px]" 
+        className="max-h-[230px]" 
       >
         {Object.keys(northernTerritory).map((key: any, index: number) => (
           <SwiperSlide key={index}>
-            <div className="home-cards p-2 flex flex-row  h-[150px] text-start bg-light-baby-blue rounded-xl shadow-lg transition-transform transform duration-500">
+            <div className="home-cards p-2 flex flex-row h-[115px] text-start bg-light-purple rounded-lg shadow-md transition-transform transform duration-500">
               <div className="w-1/2">
-              <h2 className="card-title text-lg text-gray-800 mb-1">
-                {northernTerritory[key]}
-              </h2>
-              <p className="text-sm text-gray-500">
-                Weather: 
-              </p>
-              <span className={
-                  status === "good"
-                    ? "text-green-500 font-bold"
-                    : status === "bad"
-                    ? "text-red-500 font-bold"
-                    : "text-yellow-500 font-bold"
-                }>
-                  {status.charAt(0).toUpperCase() + status.slice(1)}
-                </span>
+                <h2 className="card-title text-lg text-gray-800 mb-1">
+                  {northernTerritory[key]}
+                </h2>
+                <p className="text-sm text-gray-500">Weather:</p>
+                <div className="flex items-center">
+                  {[...Array(5)].map((_, index) => (
+                    index < starCount ? (
+                      <FaStar key={index} className="text-yellow-500" />
+                    ) : (
+                      <FaRegStar key={index} className="text-gray-300" />
+                    )
+                  ))}
                 </div>
-              <div className="w-1/2 h-[120px]">
-                <Line
-                  data={upcomingWeatherData}
-                  options={{
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                      y: {
-                        beginAtZero: true, 
-                        grid: {
-                          display: false, 
-                        },
-                      },
-                      x: {
-                        grid: {
-                          display: false, 
-                        },
-                      },
-                    },
-                  }}
-                />
+              </div>
+              <div>
+              <TiWeatherPartlySunny size={44}/>
               </div>
             </div>
           </SwiperSlide>
@@ -92,54 +60,68 @@ export const HomeCarousel: React.FC = () => {
 
       {/* Second Swiper */}
       <Swiper
-        spaceBetween={30}
+        spaceBetween={5} 
         centeredSlides={false}
         loop={true}
-        slidesPerView={4}
+        slidesPerView={5}
         modules={[Autoplay, Pagination, Navigation]}
-        className="max-h-[200px] mt-[50px]" 
+        className="max-h-[200px] mt-[10px]" 
       >
         {Object.keys(australiaLocationsString).map((key: any, index: number) => (
           <SwiperSlide key={index}>
-            <div className="home-cards flex flex-row p-2 h-[150px] text-start bg-light-baby-blue rounded-xl shadow-lg transition-transform transform hover:bg-black duration-500">
-            <div className="w-1/2">
-              <h2 className="card-title text-lg text-gray-800 mb-1">
-                {australiaLocationsString[key]}
-              </h2>
-              <p className="text-sm text-gray-500">
-                Weather: 
-              </p>
-              <span className={
-                  status === "good"
-                    ? "text-green-500 font-bold"
-                    : status === "bad"
-                    ? "text-red-500 font-bold"
-                    : "text-yellow-500 font-bold"
-                }>
-                  {status.charAt(0).toUpperCase() + status.slice(1)}
-                </span>
+            <div className="home-cards flex flex-row p-2 h-[115px] text-start bg-light-purple rounded-lg shadow-md transition-transform transform hover:bg-black duration-500">
+              <div className="w-1/2">
+                <h2 className="card-title text-lg text-gray-800 mb-1">
+                  {australiaLocationsString[key]}
+                </h2>
+                <p className="text-sm text-gray-500">Weather:</p>
+                <div className="flex items-center">
+                  {[...Array(5)].map((_, index) => (
+                    index < starCount ? (
+                      <FaStar key={index} className="text-yellow-500" />
+                    ) : (
+                      <FaRegStar key={index} className="text-gray-300" />
+                    )
+                  ))}
+                </div>
               </div>
-              <div className="w-1/2 h-[120px]">
-                <Line
-                  data={upcomingWeatherData}
-                  options={{
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                      y: {
-                        beginAtZero: true, 
-                        grid: {
-                          display: false, 
-                        },
-                      },
-                      x: {
-                        grid: {
-                          display: false, 
-                        },
-                      },
-                    },
-                  }}
-                />
+              <div>
+              <TiWeatherPartlySunny size={44}/>
+              </div>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
+      {/* Third Swiper */}
+      <Swiper
+        spaceBetween={5} 
+        centeredSlides={false}
+        loop={true}
+        slidesPerView={5}
+        modules={[Autoplay, Pagination, Navigation]}
+        className="max-h-[200px] mt-[10px]" 
+      >
+        {Object.keys(australiaLocationsString).map((key: any, index: number) => (
+          <SwiperSlide key={index}>
+            <div className="home-cards flex flex-row p-2 h-[115px] text-start bg-light-purple rounded-lg shadow-md transition-transform transform hover:bg-black duration-500">
+              <div className="w-1/2">
+                <h2 className="card-title text-lg text-gray-800 mb-1">
+                  {australiaLocationsString[key]}
+                </h2>
+                <p className="text-sm text-gray-500">Weather:</p>
+                <div className="flex items-center">
+                  {[...Array(5)].map((_, index) => (
+                    index < starCount ? (
+                      <FaStar key={index} className="text-yellow-500" />
+                    ) : (
+                      <FaRegStar key={index} className="text-gray-300" />
+                    )
+                  ))}
+                </div>
+              </div>
+              <div>
+              <TiWeatherPartlySunny size={44}/>
               </div>
             </div>
           </SwiperSlide>

@@ -14,7 +14,7 @@ const Wrapper = ({ children }: WrapperTypes) => (
     <ActivityProvider>
     <div className={styles.app}>
       <Navbar />
-      <main className="h-full">{children}</main>
+      <main>{children}</main>
       <Footer />
     </div>
     </ActivityProvider>

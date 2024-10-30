@@ -68,10 +68,7 @@ export const MainProfileScreen = ({ account, setStep }: MainProfileScreenTypes) 
   return (
     <div className="flex justify-center min-h-screen bg-gray-50 px-4"> 
       <div className="flex flex-row gap-8 w-full max-w-6xl pt-4">
-        
-        {/* Left Container - Profile and Form */}
         <div className="w-1/2 space-y-6">
-          {/* Profile Card */}
           <div className="bg-white shadow-lg rounded-2xl p-4">
             <div className="flex flex-col items-center">
               {account.photoURL ? (
@@ -86,12 +83,12 @@ export const MainProfileScreen = ({ account, setStep }: MainProfileScreenTypes) 
                 Manage Account
               </button>
             </div>
-            <div className="flex justify-center mt-2">
-              <h2 className="text-sm text-gray-600">🇦🇺 Australia</h2>
+            <div className="flex flex-col justify-center mt-2">
+              <h2 className="text-sm text-gray-600">Country: {account.country}</h2>
+              <h2 className="text-sm text-gray-600">Main Activity: {account.mainActivity}</h2>
             </div>
           </div>
 
-          {/* Toggle Button & Form/Table */}
           <div>
             <button className="bg-black text-white text-sm py-2 px-4 rounded mb-3 w-6/12" 
               onClick={() => setShowSpots(!showSpots)}>
@@ -175,7 +172,6 @@ export const MainProfileScreen = ({ account, setStep }: MainProfileScreenTypes) 
           </div>
         </div>
 
-        {/* Right Container - Map */}
         <div className="w-1/2 h-[500px]">
           <MapGL
             {...viewport}
