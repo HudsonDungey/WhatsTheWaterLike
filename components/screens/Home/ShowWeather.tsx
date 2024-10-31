@@ -8,7 +8,7 @@ interface WeatherProps {
   location: string;
 }
 
-export const ShowWeather: React.FC<WeatherProps> = ({ tide, swell, temp, wind, location }) => {
+export const ShowWeather = ({ tide, swell, temp, wind, location }: WeatherProps) => {
   return (
     <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white p-4">
       <div className="font-bold text-xl mb-2">{location}</div>

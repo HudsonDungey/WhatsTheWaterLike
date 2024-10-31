@@ -17,7 +17,7 @@ type PlanBarProps = {
   setActivity: (value: string) => void;
 };
 
-export const PlanBar: React.FC<PlanBarProps> = ({
+export const PlanBar = ({
   location,
   setLocation,
   arrivalTime,
@@ -26,7 +26,7 @@ export const PlanBar: React.FC<PlanBarProps> = ({
   setDepartureTime,
   activity,
   setActivity,
-}) => {
+}: PlanBarProps) => {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
   const handleActivitySelect = (selectedActivity: string) => {

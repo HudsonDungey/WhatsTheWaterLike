@@ -5,13 +5,19 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { FaStar, FaSearch, FaArrowLeft, FaRegCalendarAlt } from 'react-icons/fa';
-import { Map } from '~/components'
-import { FishingTips } from '~/components/screens';
+import { Map } from '~/components';
+import { FishingTips, Recipes, Species } from '~/components/screens';
 import { FishingSpot } from '~/types/mainTypes';
 import { getDateInfo } from '~/utils/utils';
 import { getFishingSpots } from '~/lib/fishingLocations';
 
 const Fishing = () => {
+  const steps = [
+    { name: "Tips", step: 1 },
+    { name: "Recipes", step: 2 },
+    { name: "Species", step: 3 },
+  ];
+
   const fishingConditionsPercent = 75; 
   //const currentDate = new Date().toLocaleDateString(); 
   const [hideSpots, setHideSpots] = useState(true)
@@ -41,9 +47,17 @@ const Fishing = () => {
 
 
   switch (step) {
+    case 3:
+      return (
+        <Species userState={"NT"} step={step} handleStep={handleStep} steps={steps}/>
+    );
+    case 2:
+      return (
+        <Recipes userState={"NT"} step={step} handleStep={handleStep} steps={steps}/>
+    );
     case 1:
       return (
-        <FishingTips step={step} handleStep={handleStep}/>
+        <FishingTips step={step} handleStep={handleStep} steps={steps}/>
     );
 
     default:
@@ -136,9 +150,9 @@ const Fishing = () => {
                   </div>
                 </div>
               </div>
-              <div className="mx-auto px-4 py-2 grid md:grid-cols-2 gap-8">
+              <div className="mx-auto px-4 py-2 w-screen flex justify-center">
                 <div
-                  className="bg-white shadow-md rounded-lg p-6 flex flex-col items-start relative h-64 w-full cursor-pointer"
+                  className="bg-white shadow-md rounded-lg p-6 flex flex-col items-center relative h-64 w-6/12 cursor-pointer"
                   onClick={() => handleStep(1)}
                 >
                   <h2 className="text-2xl font-semibold text-white mb-4 z-10">Fishing Tips</h2>

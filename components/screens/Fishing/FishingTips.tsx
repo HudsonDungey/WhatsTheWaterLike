@@ -1,12 +1,20 @@
 'use client'
+import Image from 'next/image';
 import React, { useState } from 'react';
+import { FaArrowLeft } from 'react-icons/fa';
+
+type Step = {
+  name: string;
+  step: number;
+};
 
 type FishingTipsTypes = {
   step: number;
   handleStep: (input: number) => void;
+  steps: Step[];
 };
 
-export const FishingTips = ({ step, handleStep }: FishingTipsTypes) => {
+export const FishingTips = ({ step, handleStep, steps }: FishingTipsTypes) => {
   const [location, setLocation] = useState("");
   const [targetSpecies, setTargetSpecies] = useState("");
   const [fishingTime, setFishingTime] = useState("");
@@ -24,7 +32,36 @@ export const FishingTips = ({ step, handleStep }: FishingTipsTypes) => {
   };
 
   return (
-    <div className="flex flex-col items-center pt-10 min-h-screen bg-gray-50">
+    <div className="flex flex-col items-center min-h-screen bg-gray-50">
+        <div className="w-screen flex items-center justify-between p-[10px]">
+          <div onClick={() => handleStep(0)} className="flex items-center">
+            <FaArrowLeft color="#636AE8FF" />
+          </div>
+          <div className="flex space-x-4">
+            {steps.map((stepData) => (
+              <button
+                key={stepData.step}
+                onClick={() => handleStep(stepData.step)}
+                className={`p-2 px-4 rounded-md shadow-md ${
+                  step === stepData.step ? 'text-[#636AE8FF]' : 'text-black'
+                }`}
+              >
+                {stepData.name}
+              </button>
+            ))}
+          </div>
+          <div className="w-8"></div>
+        </div>
+        <div className="relative w-full h-[200px]">
+                <h1 className="absolute top-4 left-[60px] text-white text-[60px] font-bold z-10">Fishing Tips</h1>
+                <Image
+                  src="/images/species-banner.jpg"
+                  alt="Fishing"
+                  layout="fill"
+                  objectFit="cover"
+                  className="w-full h-full"
+                />
+              </div>
       <div className="bg-white shadow-lg rounded-md w-6/12 p-8 mb-[50px]">
         <h1 className="text-2xl font-bold text-gray-800 mb-6">Fishing Tips</h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -73,13 +110,6 @@ export const FishingTips = ({ step, handleStep }: FishingTipsTypes) => {
             />
           </div>
           <div className="flex justify-end mt-4">
-            <button
-              type="button"
-              onClick={() => handleStep(step - 1)}
-              className="text-gray-500 mr-4"
-            >
-              Back
-            </button>
             <button
               type="submit"
               className="bg-blue-600 text-white py-2 px-4 rounded-lg"

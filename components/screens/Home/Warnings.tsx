@@ -4,7 +4,7 @@ interface WarningBoxProps {
   warnings: string[]; 
 }
 
-export const WarningBox: React.FC<WarningBoxProps> = ({ warnings }) => {
+export const WarningBox = ({ warnings }: WarningBoxProps) => {
   if (!warnings || warnings.length === 0) return null; 
 
   return (

@@ -18,7 +18,7 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 const weatherScore = 46
 const starCount = Math.round(weatherScore / 20);
 
-export const HomeCarousel: React.FC = () => {
+export const HomeCarousel = () => {
 
   return (
     <div className="space-y-1 pt-5">
