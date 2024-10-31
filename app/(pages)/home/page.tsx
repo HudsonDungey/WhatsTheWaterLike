@@ -1,6 +1,8 @@
 'use client'
 
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { redirect } from 'next/navigation';
 import classNames from 'classnames';
 import { useLocationContext } from '~/utils/LocationContext';
 import { HomeCarousel, WarningBox, ShowWeather, PlanBar, Activities, WeatherNews } from '~/components/screens';
@@ -45,6 +47,7 @@ const Home = () => {
   const [arrivalTime, setArrivalTime] = useState('');
   const [departureTime, setDepartureTime] = useState('');
   const [activity, setActivity] = useState('');
+  const router = useRouter();
 
   useEffect(() => {
     const savedLocation = localStorage.getItem('userLocation');
@@ -102,6 +105,10 @@ const Home = () => {
       localStorage.setItem('userLocation', JSON.stringify(location));
       setIsModalOpen(false);
     }
+  };
+
+  const handleActivityClick = (name: string) => {
+    router.push(`/${encodeURIComponent(name)}`);
   };
 
   return (
@@ -200,7 +207,7 @@ const Home = () => {
      </div> 
      */}
       <div className="min-h-[500px]">
-       <Activities/>
+       <Activities  handleActivityClick={handleActivityClick}/>
        </div>
        <div className="min-h-[500px]">
        <WeatherNews/>

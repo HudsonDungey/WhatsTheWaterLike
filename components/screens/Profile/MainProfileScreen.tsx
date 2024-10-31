@@ -81,7 +81,7 @@ export const MainProfileScreen = ({ account, setStep }: MainProfileScreenTypes) 
               <button 
                 className="text-gray-500 underline text-sm"
                 onClick={() => setStep(2)}>
-                Manage Account
+                Edit Account
               </button>
             </div>
             <div className="flex flex-col justify-center mt-2">

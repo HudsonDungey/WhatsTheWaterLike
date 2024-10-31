@@ -7,7 +7,7 @@ import { app } from './firebaseConfig';
 const auth = getAuth(app);
 const storage = getStorage(app);
 
-export const registerUser = async (email: string, password: string, username: string, profilePicture: File, mainActivity: string, country: string) => {
+export const registerUser = async (email: string, password: string, username: string, profilePicture: File, mainActivity: string, country: string, memberShipTier: string) => {
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
@@ -29,7 +29,8 @@ export const registerUser = async (email: string, password: string, username: st
       displayName: username,
       photoURL,
       mainActivity, 
-      country,      
+      country,
+      memberShipTier,    
       createdAt: new Date(),
     });
 

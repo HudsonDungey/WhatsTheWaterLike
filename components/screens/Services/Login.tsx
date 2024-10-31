@@ -14,6 +14,7 @@ export const Login = ({ handleAccountClick }: LoginTypes) => {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [isCountryDropdownVisible, setIsCountryDropdownVisible] = useState(false);
   const [filteredCountries, setFilteredCountries] = useState(countries);
+  const [memberShipTier, setMemberShipTier] = useState('free');
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
@@ -31,7 +32,7 @@ export const Login = ({ handleAccountClick }: LoginTypes) => {
       if (!profilePicture) {
         throw new Error('Please upload a profile picture');
       }
-      const user = await registerUser(email, password, username, profilePicture, mainActivity, country); 
+      const user = await registerUser(email, password, username, profilePicture, mainActivity, country, memberShipTier); 
       setAccount(user);
       handleAccountClick?.();
       setIsLoading(false);
@@ -52,6 +53,7 @@ export const Login = ({ handleAccountClick }: LoginTypes) => {
         uid: user.uid,
         email: user.email,
         displayName: user.displayName,
+        memberShipTier,
         photoURL: user.photoURL || null,
         country: data?.country || null,
         mainActivity: data?.mainActivity || null,

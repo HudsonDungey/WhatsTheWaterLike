@@ -59,3 +59,14 @@ import { QueryParams, Credentials } from "~/types/query";
     return fullUrl;
   };
   
+
+  export const getDateInfo = (daysOffset: number) => {
+    const date = new Date();
+    date.setDate(date.getDate() + daysOffset); 
+
+    // Get day of the month and day abbreviation
+    const dayOfMonth = date.getDate();
+    const dayAbbreviation = date.toLocaleString('en-US', { weekday: 'short' }).toUpperCase();
+
+    return { dayOfMonth, dayAbbreviation };
+  };

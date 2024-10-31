@@ -80,7 +80,7 @@ const Map = () => {
     };
 
     return (
-        <div className="w-screen h-screen bg-baby-blue grid grid-cols-4 p-5 gap-x-2">
+        <div className="w-screen h-screen bg-gray-100 grid grid-cols-4 p-5 gap-x-2">
             <div className="col-span-2 col-start-1 flex flex-col items-center bg-gray-100 shadow-lg h-[600px] p-4 rounded-2xl">
                 <h2 className="font-bold text-lg text-black  mb-4">Map Options</h2>
                 <div className="flex flex-row gap-[50px]">
