@@ -33,25 +33,6 @@ export const FishingTips = ({ step, handleStep, steps }: FishingTipsTypes) => {
 
   return (
     <div className="flex flex-col items-center min-h-screen bg-gray-50">
-        <div className="w-screen flex items-center justify-between p-[10px]">
-          <div onClick={() => handleStep(0)} className="flex items-center">
-            <FaArrowLeft color="#636AE8FF" />
-          </div>
-          <div className="flex space-x-4">
-            {steps.map((stepData) => (
-              <button
-                key={stepData.step}
-                onClick={() => handleStep(stepData.step)}
-                className={`p-2 px-4 rounded-md shadow-md ${
-                  step === stepData.step ? 'text-[#636AE8FF]' : 'text-black'
-                }`}
-              >
-                {stepData.name}
-              </button>
-            ))}
-          </div>
-          <div className="w-8"></div>
-        </div>
         <div className="relative w-full h-[200px]">
                 <h1 className="absolute top-4 left-[60px] text-white text-[60px] font-bold z-10">Fishing Tips</h1>
                 <Image
@@ -62,6 +43,25 @@ export const FishingTips = ({ step, handleStep, steps }: FishingTipsTypes) => {
                   className="w-full h-full"
                 />
               </div>
+        <div className="w-screen bg-gray-900 flex items-center justify-between p-[10px]">
+          <div onClick={() => handleStep(0)} className="flex items-center">
+          <FaArrowLeft color="white" size={20} />
+          </div>
+          <div className="flex space-x-[20px] rounded-lg bg-gray-50">
+            {steps.map((stepData) => (
+              <button
+                key={stepData.step}
+                onClick={() => handleStep(stepData.step)}
+                className={`p-1 px-6 text-base ${
+                  step === stepData.step ? 'text-white bg-[#636AE8FF] rounded-lg' : 'text-black'
+                }`}
+              >
+                {stepData.name}
+              </button>
+            ))}
+          </div>
+          <div className="w-8"></div>
+        </div>
       <div className="bg-white shadow-lg rounded-md w-6/12 p-8 mb-[50px]">
         <h1 className="text-2xl font-bold text-gray-800 mb-6">Fishing Tips</h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">

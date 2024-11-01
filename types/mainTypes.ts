@@ -19,3 +19,13 @@ export interface AccountDetails {
     country?: string | null; 
     mainActivity?: string | null; 
 }
+
+export type AustralianState = '' | 'NT' | 'SA' | 'NSW' | 'VIC' | 'QLD' | 'WA' | 'TAS' | 'ACT';
+
+export type speciesType = {
+  name: string;
+  eatingRating: number;
+  fightingRating: number;
+  imageUrl: string;
+  habitats: string[];
+};

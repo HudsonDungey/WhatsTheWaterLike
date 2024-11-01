@@ -49,7 +49,7 @@ const Fishing = () => {
   switch (step) {
     case 3:
       return (
-        <Species userState={"NT"} step={step} handleStep={handleStep} steps={steps}/>
+        <Species step={step} handleStep={handleStep} steps={steps}/>
     );
     case 2:
       return (
