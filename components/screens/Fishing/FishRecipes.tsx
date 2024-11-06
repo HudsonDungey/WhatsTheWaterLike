@@ -1,4 +1,5 @@
-import React from 'react';
+'use client'
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { FaArrowLeft } from 'react-icons/fa';
 
@@ -23,6 +24,7 @@ type RecipesProps = {
 };
 
 export const Recipes = ({ userState, handleStep, step, steps }: RecipesProps) => {
+    const [ searchedRecipes, setSearchedRecipes ] = useState("");
 
   const recipesByState: Record<UserState, Recipe[]> = {
     NT: [
@@ -142,12 +144,19 @@ export const Recipes = ({ userState, handleStep, step, steps }: RecipesProps) =>
           <div onClick={() => handleStep(0)} className="flex items-center">
           <FaArrowLeft color="white" size={20} />
           </div>
-          <div className="flex space-x-[20px] rounded-lg bg-gray-50">
+          <input
+             type="text"
+             placeholder="Search Recipes..."
+             value={searchedRecipes}
+             onChange={(e) => setSearchedRecipes(e.target.value)}
+             className=" bg-gray-600 px-2 py-2 w-5/12 text-black text-sm rounded-md"
+           />
+          <div className="flex w-5/12 rounded-lg bg-gray-50">
             {steps.map((stepData) => (
               <button
                 key={stepData.step}
                 onClick={() => handleStep(stepData.step)}
-                className={`p-1 px-6 text-base ${
+                className={`p-1 px-6 text-base w-1/3 ${
                   step === stepData.step ? 'text-white bg-[#636AE8FF] rounded-lg' : 'text-black'
                 }`}
               >

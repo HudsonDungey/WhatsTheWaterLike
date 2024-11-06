@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { redirect } from 'next/navigation';
 import classNames from 'classnames';
@@ -16,6 +17,7 @@ import {
   queensland,
   victoria
 } from '~/lib/locations';
+import { FaArrowLeft } from 'react-icons/fa';
 
 const dummyWarnings = [
   "Darwin: Mild storm",
@@ -112,7 +114,7 @@ const Home = () => {
   };
 
   return (
-    <div className="text-gray-900 bg-gray-50">
+    <div className="text-gray-900 bg-gray-50 pb-[100px]">
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg w-[90%] md:w-[400px]">
@@ -212,6 +214,72 @@ const Home = () => {
        <div className="min-h-[500px]">
        <WeatherNews/>
        </div>
+       <div className="w-screen mt-10 flex flex-col justify-center items-center">
+       <div className='w-10/12 bg-pink-50 mt-4 p-[50px] min-h-[340px] flex flex-row rounded-xl'>
+          <div className="w-5/12 text-start"> 
+          <h1 className="font-semibold">Community</h1>
+          <p className="text-sm leading-snug">Sint occaecat deserunt aliquip do occaecat ut quis. Cupidatat magna fugiat quis sit duis est in volup</p>
+          <p className="text-sm leading-snug mt-20 flex flex-row items-center justify-center gap-x-2"> <FaArrowLeft color='black'/> View community</p>
+          </div>  
+          <div className="w-7/12 gap-x-3 flex flex-row px-[30px] justify-center  items-center min-h-[300px]">
+          <div className="col-span-1 h-full  flex items-end">
+            <Image
+              src="/images/news4.jpg"
+              alt="img"
+              width={180}
+              height={180}
+              className="object-cover mb-5 rounded-xl"
+            />
+          </div>
+          <div className="col-span-1 h-full flex items-start">
+            <Image
+              src="/images/news5.jpg"
+              alt="img"
+              width={220}
+              height={220}
+              className="object-cover rounded-xl"
+            />
+          </div>
+          </div>
+        </div>
+
+        <div className='w-10/12 bg-blue-50 mt-4 p-[50px] min-h-[340px] flex flex-row rounded-xl'>
+          <div className="w-5/12 text-start"> 
+          <h1 className="font-semibold">Community</h1>
+          <p className="text-sm leading-snug">Sint occaecat deserunt aliquip do occaecat ut quis. Cupidatat magna fugiat quis sit duis est in volup</p>
+          <p className="text-sm leading-snug mt-20 flex flex-row items-center justify-center gap-x-2"> <FaArrowLeft color='black'/> View community</p>
+          </div>  
+          <div className="w-7/12 grid grid-cols-3 px-[30px] min-h-[300px]">
+          <div className="col-span-1 h-full flex items-end">
+            <Image
+              src="/images/news1.jpg"
+              alt="img"
+              width={180}
+              height={180}
+              className="object-cover mb-5 rounded-xl"
+            />
+          </div>
+          <div className="col-span-1 h-full flex items-start">
+            <Image
+              src="/images/news2.jpg"
+              alt="img"
+              width={180}
+              height={180}
+              className="object-cover rounded-xl"
+            />
+          </div>
+          <div className="col-span-1 h-full flex items-end">
+            <Image
+              src="/images/news3.jpg"
+              alt="img"
+              width={180}
+              height={180}
+              className="object-cover mb-5 rounded-xl"
+            />
+          </div>
+          </div>
+        </div>
+        </div>
       </div>
   );
 };

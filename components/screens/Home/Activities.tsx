@@ -14,7 +14,7 @@ const activities: Activity[] = [
   { title: 'Fishing', imgSrc: '/images/fishing.jpg', subtext: "54 reccomended locations" },
   { title: 'Surfing', imgSrc: '/images/surfing.jpg', subtext: "12 reccomended locations" },
   { title: 'Boating', imgSrc: '/images/boating.jpg', subtext: "78 reccomended locations" },
-  { title: 'Skiing', imgSrc: '/images/skiing.jpg', subtext: "34 reccomended locations" },
+  { title: 'Jetskiing', imgSrc: '/images/skiing.jpg', subtext: "34 reccomended locations" },
   { title: 'Flying', imgSrc: '/images/flying.jpg', subtext: "12 reccomended locations · 143km away" },
   { title: 'Sailing', imgSrc: '/images/sailing.jpg', subtext: "2 locations with correct conditions" },
 ];

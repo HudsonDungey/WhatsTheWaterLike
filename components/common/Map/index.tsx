@@ -10,6 +10,12 @@ interface Location {
   lng: number;
 }
 
+interface AirportType {
+  name: string;
+  latitude: number;
+  longitude: number;
+}
+
 interface FishingSpot {
   id: string;
   location: Location;
@@ -20,14 +26,16 @@ interface MapProps {
   latitude: number;
   longitude: number;
   showSpots?: boolean;
+  airports?: AirportType[];
   onMapClick?: (event: any) => void;
   onViewportChange?: (viewport: ViewState) => void;
 }
 
-const Map: React.FC<MapProps> = ({
+const MapComponent: React.FC<MapProps> = ({
   fishingSpots = [],
   latitude,
   longitude,
+  airports,
   showSpots = true,
   onMapClick,
   onViewportChange,
@@ -75,8 +83,19 @@ const Map: React.FC<MapProps> = ({
             <FaMapMarkerAlt color="red" size={32} />
           </Marker>
         ))}
+        {airports && 
+          airports.map((airport, index) => (
+            <Marker
+                key={index}
+                latitude={airport.latitude}
+                longitude={airport.longitude}
+            >
+                <div className="marker" style={{ color: 'blue', cursor: 'pointer', width: "20px", height: "20px" }}>📍</div>
+            </Marker>
+          ))
+        }
     </MapGL>
   );
 };
 
-export default Map
+export default MapComponent

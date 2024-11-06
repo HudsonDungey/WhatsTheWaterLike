@@ -29,3 +29,10 @@ export type speciesType = {
   imageUrl: string;
   habitats: string[];
 };
+
+export type AirportType = {
+  id: string;
+  name: string;
+  latitude: number;
+  longitude: number;
+};

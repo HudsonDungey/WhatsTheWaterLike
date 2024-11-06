@@ -1,20 +1,36 @@
 import { doc, setDoc, collection, getDocs } from 'firebase/firestore';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { db } from './storageConfig'; 
 import { FishingSpot } from '~/types/mainTypes';
-import { db } from '~/lib/storageConfig'; 
 
-export const addFishingSpot = async (name: string, latitude: number, longitude: number, activity: string, description: string,) => {
+export const addFishingSpot = async (
+  name: string,
+  latitude: number,
+  longitude: number,
+  activity: string,
+  description: string,
+  imageFile: File | null 
+) => {
   try {
-    const newFishingSpotRef = doc(db, 'fishingSpots', name); 
+    const newFishingSpotRef = doc(db, 'fishingSpots', name);
 
+    let imageUrl = null;
+    if (imageFile) {
+      const storage = getStorage();
+      const imageRef = ref(storage, `fishingSpots/${name}-${Date.now()}`); 
+      await uploadBytes(imageRef, imageFile);
+      imageUrl = await getDownloadURL(imageRef);
+    }
     await setDoc(newFishingSpotRef, {
       name: name,
       location: {
         lat: latitude,
         lng: longitude,
       },
-      timestamp: new Date(), 
+      timestamp: new Date(),
       activity: activity,
       description: description,
+      imageUrl: imageUrl,
     });
 
   } catch (error) {
@@ -35,6 +51,7 @@ export const getFishingSpots = async (): Promise<FishingSpot[]> => {
         location: data.location ?? { lat: 0, lng: 0 },
         activity: data.activity ?? 'Unknown Activity',
         description: data.description ?? 'No description available',
+        imageUrl: data.imageUrl ?? null,
         timestamp: data.timestamp ?? null,
       } as FishingSpot;
     });
@@ -42,6 +59,6 @@ export const getFishingSpots = async (): Promise<FishingSpot[]> => {
     return fishingSpots;
   } catch (error) {
     console.error('Error fetching fishing spots:', error);
-    return []; // Return an empty array in case of error
+    return []; 
   }
 };

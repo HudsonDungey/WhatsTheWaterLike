@@ -19,28 +19,33 @@ type SpeciesProps = {
 };
 
 export const Species = ({ step, handleStep, steps }: SpeciesProps) => {
-  const [targetSpecies, setTargetSpecies] = useState('');
-  const [selectedFish, setSelectedFish] = useState<speciesType | null>(null);
-  const [stepAlt, setStepAlt] = useState(0);
-  const [activeState, setActiveState] = useState<AustralianState>('');
-  const states: AustralianState[] = ['', 'NT', 'SA', 'NSW', 'VIC', 'QLD', 'WA', 'TAS', 'ACT'];
-
-  // Defining "All States" species by gathering species from all individual states
-  speciesByState[''] = [
-    ...speciesByState['NT'],
-    ...speciesByState['SA'],
-    ...speciesByState['NSW'],
-    ...speciesByState['VIC'],
-    ...speciesByState['QLD'],
-    ...speciesByState['WA'],
-    ...speciesByState['TAS'],
-    ...speciesByState['ACT'],
-  ];
-
-  const species = activeState ? speciesByState[activeState] : speciesByState[''];
-  const filteredSpecies = species.filter((speciesObj) =>
-    speciesObj.name.toLowerCase().includes(targetSpecies.toLowerCase())
-  );
+    const [targetSpecies, setTargetSpecies] = useState('');
+    const [selectedFish, setSelectedFish] = useState<speciesType | null>(null);
+    const [stepAlt, setStepAlt] = useState(0);
+    const [activeState, setActiveState] = useState<AustralianState>('');
+    const states: AustralianState[] = ['', 'NT', 'SA', 'NSW', 'VIC', 'QLD', 'WA', 'TAS', 'ACT'];
+  
+    speciesByState[''] = [
+        ...speciesByState['NT'],
+        ...speciesByState['SA'],
+        ...speciesByState['NSW'],
+        ...speciesByState['VIC'],
+        ...speciesByState['QLD'],
+        ...speciesByState['WA'],
+        ...speciesByState['TAS'],
+        ...speciesByState['ACT'],
+      ];
+    
+    const uniqueSpecies = Array.from(
+      new Map(
+        speciesByState[''].map((fish) => [fish.name, fish])
+      ).values()
+    );
+  
+    const species = activeState ? speciesByState[activeState] : uniqueSpecies;
+    const filteredSpecies = species.filter((speciesObj) =>
+      speciesObj.name.toLowerCase().includes(targetSpecies.toLowerCase())
+    );
 
   const renderStars = (rating: number) => (
     <div className="flex space-x-1">
@@ -72,30 +77,30 @@ export const Species = ({ step, handleStep, steps }: SpeciesProps) => {
         <div onClick={() => handleStep(0)} className="flex items-center cursor-pointer">
           <FaArrowLeft color="white" size={20} />
         </div>
-        <div className="flex space-x-[20px] rounded-lg bg-gray-50">
-          {steps.map((stepData) => (
-            <button
-              key={stepData.step}
-              onClick={() => handleStep(stepData.step)}
-              className={`p-1 px-6 text-base ${
-                step === stepData.step ? 'text-white bg-[#636AE8FF] rounded-lg' : 'text-black'
-              }`}
-            >
-              {stepData.name}
-            </button>
-          ))}
-        </div>
-        <div className="w-8"></div>
-      </div>
-      <div className="flex flex-row w-screen items-center justify-center p-[50px]">
-        <h1 className="text-xl font-bold pr-[10px] text-black">Fish Species</h1>
         <input
           type="text"
           placeholder="Search species"
           value={targetSpecies}
           onChange={(e) => setTargetSpecies(e.target.value)}
-          className="border px-2 py-4 w-6/12 text-black text-sm rounded-md"
+          className=" bg-gray-600 px-2 py-2 w-5/12 text-black text-sm rounded-md"
         />
+          <div className="flex w-5/12 rounded-lg bg-gray-50">
+            {steps.map((stepData) => (
+              <button
+                key={stepData.step}
+                onClick={() => handleStep(stepData.step)}
+                className={`p-1 px-6 w-1/3 text-base ${
+                  step === stepData.step ? 'text-white bg-[#636AE8FF] rounded-lg' : 'text-black'
+                }`}
+              >
+                {stepData.name}
+              </button>
+            ))}
+          </div>
+          <div className="w-8"></div>
+        </div>
+      <div className="flex flex-row w-screen items-center justify-center p-[50px]">
+        <h1 className="text-3xl font-bold pr-[10px] text-black">Fish Species</h1>
       </div>
       <div className="flex items-center justify-center mt-1 space-x-2">
         {states.map((state) => (
