@@ -14,6 +14,7 @@ type MainProfileScreenTypes = {
 export const MainProfileScreen = ({ account, setStep }: MainProfileScreenTypes) => {
   const [name, setName] = useState('');
   const [latitude, setLatitude] = useState('');
+  const [image, setImage] = useState<File | null>(null);
   const [longitude, setLongitude] = useState('');
   const [activity, setActivity] = useState('');
   const [description, setDescription] = useState('');
@@ -55,16 +56,18 @@ export const MainProfileScreen = ({ account, setStep }: MainProfileScreenTypes) 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (name && latitude && longitude) {
-      await addFishingSpot(name, parseFloat(latitude), parseFloat(longitude), activity, description);
-      fetchFishingSpots(); 
+    if (name && latitude && longitude && image) {
+      await addFishingSpot(name, parseFloat(latitude), parseFloat(longitude), activity, description, image);
+      fetchFishingSpots();
       setName('');
       setLatitude('');
       setLongitude('');
       setActivity('');
       setDescription('');
+      setImage(null); 
     }
   };
+  
 
   return (
     <div className="flex justify-center min-h-screen bg-gray-50 px-4"> 
@@ -123,6 +126,12 @@ export const MainProfileScreen = ({ account, setStep }: MainProfileScreenTypes) 
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-2">
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => setImage(e.target.files ? e.target.files[0] : null)}
+                  className="border p-2 w-full text-black text-sm"
+                />
                 <input
                   type="text"
                   placeholder="Spot Name"
