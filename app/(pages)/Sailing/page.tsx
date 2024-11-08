@@ -8,7 +8,7 @@ import { FaStar, FaSearch, FaArrowLeft, FaArrowDown, FaWater, FaRegCalendarAlt }
 import { TiWeatherPartlySunny } from "react-icons/ti";
 import { WiSunrise } from "react-icons/wi";
 import { FiWind } from "react-icons/fi";
-import { Map } from '~/components'
+import { MapComponent } from '~/components'
 import { FishingSpot } from '~/types/mainTypes';
 import { getDateInfo } from '~/utils/utils';
 import { getFishingSpots } from '~/lib/fishingLocations';
@@ -110,7 +110,7 @@ const Sailing = () => {
         </button>
       </div>
       <div className="relative h-64 mt-4">
-        <Map 
+        <MapComponent 
          longitude={130.8334} 
          latitude={-12.4578} 
          showSpots={!hideSpots} 
