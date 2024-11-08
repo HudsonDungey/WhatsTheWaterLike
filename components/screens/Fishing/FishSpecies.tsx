@@ -74,22 +74,22 @@ export const Species = ({ step, handleStep, steps }: SpeciesProps) => {
         />
       </div>
       <div className="w-screen bg-gray-900 flex items-center justify-between p-[10px]">
-        <div onClick={() => handleStep(0)} className="flex items-center cursor-pointer">
+          <div onClick={() => handleStep(0)} className="flex items-center pr-2">
           <FaArrowLeft color="white" size={20} />
-        </div>
-        <input
-          type="text"
-          placeholder="Search species"
-          value={targetSpecies}
-          onChange={(e) => setTargetSpecies(e.target.value)}
-          className=" bg-gray-600 px-2 py-2 w-5/12 text-black text-sm rounded-md"
-        />
-          <div className="flex w-5/12 rounded-lg bg-gray-50">
+          </div>
+          <input
+             type="text"
+             placeholder="Search Tips..."
+             value={targetSpecies}
+             onChange={(e) => setTargetSpecies(e.target.value)}
+             className=" bg-gray-600 px-2 py-2 w-5/12 text-black text-sm rounded-md"
+           />
+          <div className="flex w-7/12 rounded-lg ml-1 bg-gray-50">
             {steps.map((stepData) => (
               <button
                 key={stepData.step}
                 onClick={() => handleStep(stepData.step)}
-                className={`p-1 px-6 w-1/3 text-base ${
+                className={`p-1 md:px-6 w-1/3 text-sm md:text-base ${
                   step === stepData.step ? 'text-white bg-[#636AE8FF] rounded-lg' : 'text-black'
                 }`}
               >
@@ -97,26 +97,26 @@ export const Species = ({ step, handleStep, steps }: SpeciesProps) => {
               </button>
             ))}
           </div>
-          <div className="w-8"></div>
+          <div className="hidden md:w-8"></div>
         </div>
       <div className="flex flex-row w-screen items-center justify-center p-[50px]">
         <h1 className="text-3xl font-bold pr-[10px] text-black">Fish Species</h1>
       </div>
-      <div className="flex items-center justify-center mt-1 space-x-2">
+      <div className="flex items-center justify-center mt-1 space-x-1 md:space-x-2">
         {states.map((state) => (
           <button
             key={state}
             onClick={() => setActiveState(state)}
-            className={`px-4 py-2 rounded-lg text-sm font-semibold transition duration-200 ${
+            className={`px-2 py-1 md:px-4 md:py-2 rounded-lg text-xs md:text-sm font-semibold transition duration-200 ${
               activeState === state ? 'bg-blue-600 text-white' : 'bg-gray-200 text-black'
             }`}
           >
-            {state || 'All States'}
+            {state || 'All'}
           </button>
         ))}
       </div>
       {filteredSpecies.length > 0 ? (
-        <ul className="grid grid-cols-3 gap-8 pt-3">
+        <ul className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-8 pt-3 p-2">
           {filteredSpecies.map((speciesObj, index) => (
             <li
               key={index}
@@ -126,7 +126,7 @@ export const Species = ({ step, handleStep, steps }: SpeciesProps) => {
               }}              
               className="bg-white shadow-md rounded-lg p-4 text-lg font-semibold text-gray-700 cursor-pointer"
             >
-              <div className="relative h-[110px] w-[260px] rounded-lg overflow-hidden">
+              <div className="relative h-[50px] md:h-[110px] md:w-[260px] rounded-lg overflow-hidden">
                 <Image
                   src="/images/fish-img.png"
                   alt={speciesObj.name}

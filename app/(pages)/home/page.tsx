@@ -161,7 +161,7 @@ const Home = () => {
       )}
       
       <div className="w-screen px-10 pt-10">
-        <div className="p-4 flex w-full justify-center items-center">
+        <div className="hidden md:flex p-4 w-full justify-center items-center">
           <PlanBar
             location={location}
             setLocation={setGoToLocation}
@@ -215,42 +215,45 @@ const Home = () => {
        <WeatherNews/>
        </div>
        <div className="w-screen mt-10 flex flex-col justify-center items-center">
-       <div className='w-10/12 bg-pink-50 mt-4 p-[50px] min-h-[340px] flex flex-row rounded-xl'>
-          <div className="w-5/12 text-start"> 
-          <h1 className="font-semibold">Community</h1>
-          <p className="text-sm leading-snug">Sint occaecat deserunt aliquip do occaecat ut quis. Cupidatat magna fugiat quis sit duis est in volup</p>
-          <p className="text-sm leading-snug mt-20 flex flex-row items-center justify-center gap-x-2"> <FaArrowLeft color='black'/> View community</p>
+       <div className="w-full sm:w-10/12 bg-pink-50 mt-4 p-[50px] md:min-h-[340px] flex flex-col sm:flex-row rounded-xl">
+          <div className="w-full sm:w-5/12 text-start mb-4 sm:mb-0"> 
+            <h1 className="font-semibold">Community</h1>
+            <p className="text-sm leading-snug">Sint occaecat deserunt aliquip do occaecat ut quis. Cupidatat magna fugiat quis sit duis est in volup</p>
+            <p className="text-sm leading-snug mt-5 sm:mt-20 flex flex-row items-center justify-center gap-x-2"> 
+              <FaArrowLeft color="black" /> View community
+            </p>
           </div>  
-          <div className="w-7/12 gap-x-3 flex flex-row px-[30px] justify-center  items-center min-h-[300px]">
-          <div className="col-span-1 h-full  flex items-end">
-            <Image
-              src="/images/news4.jpg"
-              alt="img"
-              width={180}
-              height={180}
-              className="object-cover mb-5 rounded-xl"
-            />
-          </div>
-          <div className="col-span-1 h-full flex items-start">
-            <Image
-              src="/images/news5.jpg"
-              alt="img"
-              width={220}
-              height={220}
-              className="object-cover rounded-xl"
-            />
-          </div>
+          <div className="w-full hidden sm:w-7/12 gap-x-3 md:flex sm:flex-row flex-col px-[30px] justify-center items-center min-h-[300px]">
+            <div className="col-span-1 h-full hidden md:flex items-end mb-4 sm:mb-0">
+              <Image
+                src="/images/news4.jpg"
+                alt="img"
+                width={180}
+                height={180}
+                className="object-cover rounded-xl"
+              />
+            </div>
+            <div className="col-span-1 h-full hidden md:flex items-start">
+              <Image
+                src="/images/news5.jpg"
+                alt="img"
+                width={220}
+                height={220}
+                className="object-cover rounded-xl"
+              />
+            </div>
           </div>
         </div>
 
-        <div className='w-10/12 bg-blue-50 mt-4 p-[50px] min-h-[340px] flex flex-row rounded-xl'>
+
+        <div className='w-10/12 bg-blue-50 mt-4 p-[50px] md:min-h-[340px] flex flex-row rounded-xl'>
           <div className="w-5/12 text-start"> 
           <h1 className="font-semibold">Community</h1>
           <p className="text-sm leading-snug">Sint occaecat deserunt aliquip do occaecat ut quis. Cupidatat magna fugiat quis sit duis est in volup</p>
           <p className="text-sm leading-snug mt-20 flex flex-row items-center justify-center gap-x-2"> <FaArrowLeft color='black'/> View community</p>
           </div>  
           <div className="w-7/12 grid grid-cols-3 px-[30px] min-h-[300px]">
-          <div className="col-span-1 h-full flex items-end">
+          <div className="col-span-1 h-full hidden md:flex items-end">
             <Image
               src="/images/news1.jpg"
               alt="img"
@@ -259,7 +262,7 @@ const Home = () => {
               className="object-cover mb-5 rounded-xl"
             />
           </div>
-          <div className="col-span-1 h-full flex items-start">
+          <div className="col-span-1 h-full hidden md:flex items-start">
             <Image
               src="/images/news2.jpg"
               alt="img"
@@ -268,7 +271,7 @@ const Home = () => {
               className="object-cover rounded-xl"
             />
           </div>
-          <div className="col-span-1 h-full flex items-end">
+          <div className="col-span-1 h-full hidden md:flex items-end">
             <Image
               src="/images/news3.jpg"
               alt="img"

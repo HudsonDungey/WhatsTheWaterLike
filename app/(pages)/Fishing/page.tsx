@@ -69,8 +69,8 @@ const Fishing = () => {
               <div className="w-screen p-[10px] bg-white text-start" onClick={() => router.push('/home')}>
                 <FaArrowLeft color="#636AE8FF" />
               </div>
-              <div className="relative w-full h-64 md:h-96">
-                <h1 className="absolute top-4 left-[60px] text-white text-[60px] font-bold z-10">Fishing</h1>
+              <div className="relative w-full h-44 md:h-96">
+                <h1 className="absolute top-4 left-[20px] md:left-[60px] text-white text-[40px] md:text-[60px] font-bold z-10">Fishing</h1>
                 <Image
                   src="/images/fishing-banner.jpg"
                   alt="Fishing"
@@ -79,14 +79,14 @@ const Fishing = () => {
                   className="w-full h-full"
                 />
               </div>
-              <div className="mx-auto h-[600px] px-[50px] py-2 grid md:grid-cols-12 gap-8">
-                <div className="bg-white col-span-8 shadow-md rounded-lg p-1">
-                  <h2 className="text-3xl pl-6 pt-4 text-start font-semibold text-gray-700">Fishing Conditions</h2>
-                  <p className="text-2xl pl-6 text-start font-semibold text-gray-700">Darwin Harbour</p>
-                  <p className="text-xl pl-6 text-start font-semibold text-gray-700">{currentDate}</p>
-                  <h1 className='text-green-600 pl-6 pt-6 text-start text-[40px] font-bold'>GOOD</h1>
+              <div className="mx-auto h-[390px] md:h-[600px] px-[50px] py-2 flex flex-col md:grid md:grid-cols-12 gap-8">
+                <div className="bg-white col-span-8 shadow-md rounded-lg p-1 mb-[100px]">
+                  <h2 className="text-xl md:text-3xl pl-6 pt-4 text-start font-semibold text-gray-700">Fishing Conditions</h2>
+                  <p className="md:text-2xl pl-6 text-start font-semibold text-gray-700">Darwin Harbour</p>
+                  <p className=" text-sm md:text-xl pl-6 text-start md:font-semibold text-gray-700">{currentDate}</p>
+                  <h1 className='text-green-600 md:pl-6 pt-6 md:text-start mb-2 text-[20px] md:text-[40px] font-bold'>GOOD</h1>
                   <div className="flex flex-col items-center justify-center">
-                    <div className="relative w-[200px] h-[200px] rounded-full bg-gray-200">
+                    <div className="relative w-[140px] h-[140px] md:w-[200px] md:h-[200px] rounded-full bg-gray-200">
                       <div
                         className="absolute top-0 left-0 w-full h-full rounded-full"
                         style={{
@@ -108,7 +108,7 @@ const Fishing = () => {
                       ))}
                     </div>
                   </div>
-                  <div className="w-full">
+                  <div className="hidden md:block w-full">
                     <h1 className="w-full mt-[25px] p-2 leading-tight text-sm rounded-[10px] flex flex-row justify-center items-center gap-2 bg-[#636AE8FF]">
                       <FaRegCalendarAlt size={20} /> Select Date
                     </h1>
@@ -128,9 +128,11 @@ const Fishing = () => {
                     </div>
                   </div>
                 </div>
-                <div className="col-span-4 flex flex-col">
+
+
+                <div className="md:col-span-4 flex flex-col">
                 <div
-                  className="bg-white shadow-md rounded-lg p-6 flex flex-col items-center relative cursor-pointer"
+                  className="hidden md:flex bg-white shadow-md rounded-lg p-6 flex-col items-center relative cursor-pointer"
                   onClick={() => handleStep(1)}
                 >
                   <h2 className="text-2xl font-semibold text-white mb-4 z-10">Fishing Tips</h2>
@@ -142,7 +144,7 @@ const Fishing = () => {
                     className="rounded-md"
                   />
                 </div>
-                <div className="bg-white col-span-6 shadow-md mt-[15px] rounded-lg p-4 flex flex-col space-y-4">
+                <div className="hidden md:flex bg-white col-span-6 shadow-md mt-[15px] rounded-lg p-4 flex-col space-y-4">
                  <button
                    className="text-sm border px-2 py-1 rounded-[4px] flex flex-row items-center text-center justify-center shadow-md border-gray-300 text-black font-medium"
                    onClick={handleFishingSpots}
@@ -165,8 +167,11 @@ const Fishing = () => {
                  </button>
                </div>
                 </div>
+
+
+
               </div>
-              <div className="relative w-full h-[140px] md:h-[150px] mt-[40px]">
+              <div className="hidden md:relative w-full h-[140px] md:h-[150px]">
                 <Image
                   src="/images/weather-banner.jpg"
                   alt="Fishing"
@@ -178,7 +183,19 @@ const Fishing = () => {
                   <p className="text-black bg-white rounded-[40px] text-2xl font-bold py-3 px-8">Weather</p>
                 </div>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-[40px] p-[20px]">
+              <div
+                  className="flex md:hidden p-6 mt-5 flex-col items-center relative cursor-pointer"
+                  onClick={() => handleStep(1)}
+                >
+                  <h2 className="text-2xl font-semibold text-white mb-4 z-10">Fishing Tips</h2>
+                  <Image
+                    src="/images/fish-species.jpg"
+                    alt="Fish"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 p-4 mt-6">
                   <div className=" bg-purple-100 p-3 rounded-lg text-start shadow-md flex flex-col justify-between">
                   <div className='w-full flex flex-row items-center justify-between'>
                     <h2 className="text-base font-medium text-purple-600">Wind</h2>
@@ -258,7 +275,7 @@ const Fishing = () => {
                     </div>
                   </div>
                 </div>
-            </div>
+                </div>
         );
 }
 };

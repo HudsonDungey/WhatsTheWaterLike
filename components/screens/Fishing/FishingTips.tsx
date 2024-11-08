@@ -45,7 +45,7 @@ export const FishingTips = ({ step, handleStep, steps }: FishingTipsTypes) => {
                 />
               </div>
         <div className="w-screen bg-gray-900 flex items-center justify-between p-[10px]">
-          <div onClick={() => handleStep(0)} className="flex items-center">
+          <div onClick={() => handleStep(0)} className="flex items-center pr-2">
           <FaArrowLeft color="white" size={20} />
           </div>
           <input
@@ -55,12 +55,12 @@ export const FishingTips = ({ step, handleStep, steps }: FishingTipsTypes) => {
              onChange={(e) => setSearchedTip(e.target.value)}
              className=" bg-gray-600 px-2 py-2 w-5/12 text-black text-sm rounded-md"
            />
-          <div className="flex w-5/12 rounded-lg bg-gray-50">
+          <div className="flex w-7/12 rounded-lg ml-1 bg-gray-50">
             {steps.map((stepData) => (
               <button
                 key={stepData.step}
                 onClick={() => handleStep(stepData.step)}
-                className={`p-1 px-6 w-1/3 text-base ${
+                className={`p-1 md:px-6 w-1/3 text-sm md:text-base ${
                   step === stepData.step ? 'text-white bg-[#636AE8FF] rounded-lg' : 'text-black'
                 }`}
               >
@@ -68,9 +68,9 @@ export const FishingTips = ({ step, handleStep, steps }: FishingTipsTypes) => {
               </button>
             ))}
           </div>
-          <div className="w-8"></div>
+          <div className="hidden md:w-8"></div>
         </div>
-      <div className="bg-white shadow-lg rounded-md w-6/12 p-8 mb-[50px]">
+      <div className="bg-white mt-[20px] shadow-lg rounded-md md:w-6/12 p-8 mb-[50px]">
         <h1 className="text-2xl font-bold text-gray-800 mb-6">Fishing Tips</h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div className="flex flex-col">
@@ -80,7 +80,7 @@ export const FishingTips = ({ step, handleStep, steps }: FishingTipsTypes) => {
               placeholder="Enter your fishing location"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              className="border p-2 w-full text-black bg-gray-100 rounded-md"
+              className="border text-sm p-2 w-full text-black bg-gray-100 rounded-md"
               required
             />
           </div>
@@ -91,7 +91,7 @@ export const FishingTips = ({ step, handleStep, steps }: FishingTipsTypes) => {
               placeholder="Enter target species"
               value={targetSpecies}
               onChange={(e) => setTargetSpecies(e.target.value)}
-              className="border p-2 w-full text-black bg-gray-100 rounded-md"
+              className="border text-sm p-2 w-full text-black bg-gray-100 rounded-md"
               required
             />
           </div> 
@@ -102,7 +102,7 @@ export const FishingTips = ({ step, handleStep, steps }: FishingTipsTypes) => {
               placeholder="Enter preferred fishing times (e.g., dawn, dusk)"
               value={fishingTime}
               onChange={(e) => setFishingTime(e.target.value)}
-              className="border p-2 w-full text-black bg-gray-100 rounded-md"
+              className="border text-sm p-2 w-full text-black bg-gray-100 rounded-md"
               required
             />
           </div>
@@ -113,14 +113,14 @@ export const FishingTips = ({ step, handleStep, steps }: FishingTipsTypes) => {
               placeholder="Enter bait or lure choice"
               value={baitOrLure}
               onChange={(e) => setBaitOrLure(e.target.value)}
-              className="border p-2 w-full text-black bg-gray-100 rounded-md"
+              className="border text-sm p-2 w-full text-black bg-gray-100 rounded-md"
               required
             />
           </div>
-          <div className="flex justify-end mt-4">
+          <div className="flex justify-end md:mt-4">
             <button
               type="submit"
-              className="bg-blue-600 text-white py-2 px-4 rounded-lg"
+              className="bg-blue-600 text-sm md:text-base py-1 px-2 text-white md:py-2 md:px-4 rounded-lg"
             >
               Submit
             </button>

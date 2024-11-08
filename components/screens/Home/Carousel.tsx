@@ -29,6 +29,20 @@ export const HomeCarousel = () => {
         centeredSlides={false}
         loop={true}
         slidesPerView={5}
+        breakpoints={{
+          1024: {
+            slidesPerView: 5,
+          },
+          768: {
+            slidesPerView: 4,
+          },
+          480: {
+            slidesPerView: 2,
+          },
+          0: {
+            slidesPerView: 2,
+          },
+        }}
         modules={[Autoplay, Pagination, Navigation]}
         className="max-h-[230px]" 
       >
@@ -50,7 +64,7 @@ export const HomeCarousel = () => {
                   ))}
                 </div>
               </div>
-              <div>
+              <div className="w-1/2 flex justify-end">
               <TiWeatherPartlySunny size={44}/>
               </div>
             </div>
@@ -64,6 +78,20 @@ export const HomeCarousel = () => {
         centeredSlides={false}
         loop={true}
         slidesPerView={5}
+        breakpoints={{
+          1024: {
+            slidesPerView: 5,
+          },
+          768: {
+            slidesPerView: 4,
+          },
+          480: {
+            slidesPerView: 2,
+          },
+          0: {
+            slidesPerView: 2,
+          },
+        }}
         modules={[Autoplay, Pagination, Navigation]}
         className="max-h-[200px] mt-[10px]" 
       >
@@ -85,42 +113,7 @@ export const HomeCarousel = () => {
                   ))}
                 </div>
               </div>
-              <div>
-              <TiWeatherPartlySunny size={44}/>
-              </div>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
-
-      {/* Third Swiper */}
-      <Swiper
-        spaceBetween={5} 
-        centeredSlides={false}
-        loop={true}
-        slidesPerView={5}
-        modules={[Autoplay, Pagination, Navigation]}
-        className="max-h-[200px] mt-[10px]" 
-      >
-        {Object.keys(australiaLocationsString).map((key: any, index: number) => (
-          <SwiperSlide key={index}>
-            <div className="home-cards flex flex-row p-2 h-[115px] text-start bg-light-purple rounded-lg shadow-md transition-transform transform hover:bg-black duration-500">
-              <div className="w-1/2">
-                <h2 className="card-title text-lg text-gray-800 mb-1">
-                  {australiaLocationsString[key]}
-                </h2>
-                <p className="text-sm text-gray-500">Weather:</p>
-                <div className="flex items-center">
-                  {[...Array(5)].map((_, index) => (
-                    index < starCount ? (
-                      <FaStar key={index} className="text-yellow-500" />
-                    ) : (
-                      <FaRegStar key={index} className="text-gray-300" />
-                    )
-                  ))}
-                </div>
-              </div>
-              <div>
+              <div className="w-1/2 flex justify-end">
               <TiWeatherPartlySunny size={44}/>
               </div>
             </div>

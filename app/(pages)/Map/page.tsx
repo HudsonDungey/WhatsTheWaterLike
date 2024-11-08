@@ -15,9 +15,8 @@ const Map = () => {
     const [showLongitude, setShowLongitude] = useState(130.8334); 
     const [fishingSpots, setFishingSpots] = useState<FishingSpot[]>([]);
 
-    // New location state
     const [spotName, setSpotName] = useState("");
-    const [image, setImage] = useState<File | null>(null); // Keep as File for upload
+    const [image, setImage] = useState<File | null>(null); 
     const [info, setInfo] = useState("");
     const [savedLat, setSavedLat] = useState("");
     const [savedLong, setSavedLong] = useState("");
@@ -47,6 +46,8 @@ const Map = () => {
         bearing: 0,
         pitch: 0,
     });
+
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const fetchFishingSpots = async () => {
         const spots = await getFishingSpots();
@@ -103,10 +104,9 @@ const Map = () => {
         }
     };
 
-    // Handle selecting image file
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
-            setImage(e.target.files[0]); // Set the file directly
+            setImage(e.target.files[0]); 
         }
     };
 
@@ -124,7 +124,7 @@ const Map = () => {
 
     return (
       <div className="w-screen min-h-screen bg-gray-100 flex flex-col">
-          <div className="relative h-[700px] rounded-2xl p-[40px]">
+          <div className="relative w-screen h-[400px] md:h-[700px] rounded-2xl p-[5px] md:p-[40px] ">
               <MapGL
                   {...viewport}
                   mapStyle="mapbox://styles/mapbox/satellite-v9"
@@ -142,7 +142,17 @@ const Map = () => {
                       </Marker>
                   ))}
               </MapGL>
-              <div className="absolute top-14 left-14 bg-white bg-opacity-90 p-2 rounded-md shadow-lg w-[300px]">
+              <div className="absolute top-5 z-40 left-5 md:top-14 md:left-14 md:hidden">
+                  <button 
+                      className="bg-gray-800 text-xs text-white font-semibold py-[1px] px-[6px] rounded-sm"
+                      onClick={() => setIsMenuOpen(!isMenuOpen)}
+                  >
+                      {isMenuOpen ? "Close" : "Options"}
+                  </button>
+              </div>
+              <div 
+                  className={`absolute top-4 z-20 left-4 md:top-14 md:left-14 md:block bg-white bg-opacity-90 p-2 rounded-md shadow-lg w-11/12 md:w-[300px] ${isMenuOpen ? 'block' : 'hidden'}`}
+              >
                   <h2 className="font-bold text-sm text-gray-700 mb-2">Map Options</h2>
                   <input
                       type="text"
@@ -165,7 +175,7 @@ const Map = () => {
                       </ul>
                   )}
                   <div className="flex flex-col gap-2">
-                  <h1 className="text-sm font-semibold">Activity Options</h1>
+                      <h1 className="text-sm font-semibold">Activity Options</h1>
                       <label className="flex items-center text-sm text-gray-600">
                           <input
                               type="checkbox"
@@ -271,8 +281,8 @@ const Map = () => {
                   </div>
               </div>
           </div>
-          <div className="w-screen p-[40px] flex flex-row gap-x-3">
-              <div className="w-1/2 p-[20px] rounded-[10px] flex flex-col justify-start items-start shadow-xl">
+          <div className="w-screen md:p-[40px] flex flex-row gap-x-3">
+              <div className="md:w-1/2 p-[20px] rounded-[10px] flex flex-col justify-start items-start shadow-xl">
                   <h1 className="font-bold text-4xl">New Location</h1>
                   <p className="font-semibold text-sm pt-2">Location Photo</p>
                   <div className="relative w-[350px] h-[250px] rounded-md overflow-hidden bg-gray-200 cursor-pointer">
@@ -294,6 +304,7 @@ const Map = () => {
                           )}
                       </label>
                   </div>
+                  <p className="font-semibold text-sm pt-3">Spot Name</p>
                   <input
                       type="text"
                       placeholder="Spot Name..."

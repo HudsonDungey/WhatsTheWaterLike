@@ -64,7 +64,7 @@ const Navbar = () => {
   });
 
   const activeClass = classNames(
-    'text-primary after:text-red-600 p-2 border-black rounded-3xl text-red-800'
+    'text-primary after:text-red-600 border-black rounded-3xl text-red-800'
   );  
 
   const expandedClasses = classNames(
@@ -74,15 +74,16 @@ const Navbar = () => {
   return (
     <header className="z-50 bg-white text-white">
       <nav className={expandedClasses}>
-        <div className="flex flex-row">
+        <div className="flex flex-row items-center justify-between w-full">
           <Link href="/" className="inline-block text-xl lg:text-2xl pr-[100px]">
-            <h1 className="text-xl text-black font-bold hover:text-primary transition-colors duration-300 flex flex-row">
+            <h1 className="text-sm md:text-xl text-black font-bold hover:text-primary transition-colors duration-300 flex flex-row">
               <img src="/images/wind.png" alt="logo" className="w-[30px] h-[30px] pr-1 invert" />
               Whats the water like?
             </h1>
           </Link>
         </div>
-        
+
+
         <div className="flex-1">
           <ul className="hidden text-start lg:flex h-full items-center justify-start rounded-3xl text-black py-[10px] px-[10px] gap-x-[40px]">
             {mainNav.map((link, index) => (
@@ -127,6 +128,15 @@ const Navbar = () => {
             )}
           </div>
 
+          <button 
+            className="lg:hidden flex flex-col items-center justify-center pr-3"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            <div className={`w-6 h-0.5  bg-black transform transition duration-300 ${isMenuOpen ? 'rotate-45 translate-y-2' : ''}`} />
+            <div className={`w-6 h-0.5 bg-black my-2 transition duration-300 ${isMenuOpen ? 'opacity-0' : ''}`} />
+            <div className={`w-6 h-0.5 bg-black transform transition duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+          </button>
+
           <div>
             {account ? (
               <button className="flex flex-col justify-center items-center" onClick={handleProfileClick}>
@@ -144,6 +154,26 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
+
+      {isMenuOpen && (
+        <div className="lg:hidden bg-white absolute top-0 left-0 w-full p-6 shadow-lg z-50">
+          <ul className="space-y-4 text-black">
+            {mainNav.map((link, index) => (
+              <li key={index}>
+                <Link
+                  className={`${navLinkClasses} ${
+                    link.url === pathname && activeClass
+                  }`}
+                  href={link.url}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {link.text}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       {isLoginModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">

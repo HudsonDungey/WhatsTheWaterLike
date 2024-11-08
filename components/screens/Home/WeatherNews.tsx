@@ -22,12 +22,12 @@ export const WeatherNews = () => {
     <div className="flex flex-col md:flex-row items-center justify-around pt-20 gap-4 p-4">
 
     <div className="flex flex-col justify-center items-center w-full md:w-1/2 bg-gradient-to-b from-white to-gray-400 shadow-xl rounded-lg">
-        <h1 className="font-bold pb-[20px] text-[40px] flex flex-row justify-center items-center">
+        <h1 className="font-bold pb-[20px] text-[30px] md:text-[40px] flex flex-row justify-center items-center">
             <IoIosWarning size={64} color='red' className='mr-3'/> Weather Alerts
         </h1>
         <ul className="list-disc list-inside text-sm text-gray-700">
           {Alerts.map((alert, index) => (
-            <li key={index} className="mb-2 bg-gray-400 flex flex-row justify-center items-center p-2 rounded-[10px] max-h-[300px] overflow-y-scroll">
+            <li key={index} className="mb-2 bg-gray-300 flex flex-row justify-center items-center p-2 rounded-[10px] max-h-[300px] overflow-y-scroll">
             <RiErrorWarningFill size={40} color='red' className="mr-3"/>
             <div className="flex flex-col items-start justify-start">
             <p>
@@ -47,13 +47,13 @@ export const WeatherNews = () => {
 
 
     <div className="flex flex-col items-center w-full md:w-1/2 bg-gradient-to-b from-white to-gray-400 shadow-xl h-[300px] rounded-lg">
-        <h1 className="font-bold pb-[20px] text-[40px] flex flex-row justify-center items-center">
+        <h1 className="font-bold pb-[20px] text-[30px] md:text-[40px] flex flex-row justify-center items-center">
             <MdAnnouncement size={54} className='mr-3'/> News
         </h1>
         <ul className="list-disc list-inside text-sm text-gray-700">
           {newsAlerts.map((item, index) => (
-            <li key={index} className="mb-2 flex flex-col">
-            <p className="">
+            <li key={index} className="mb-2 flex flex-col pb-2 justify-center items-center">
+            <p className="w-10/12">
               {item.info}
             </p>
             <p className="">

@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { FaArrowLeft } from 'react-icons/fa';
 
@@ -25,6 +25,16 @@ type RecipesProps = {
 
 export const Recipes = ({ userState, handleStep, step, steps }: RecipesProps) => {
     const [ searchedRecipes, setSearchedRecipes ] = useState("");
+    const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+    useEffect(() => {
+      const updateScreenSize = () => {
+        setIsSmallScreen(window.innerWidth < 768);
+      };
+      updateScreenSize();
+      window.addEventListener('resize', updateScreenSize);
+      return () => window.removeEventListener('resize', updateScreenSize);
+    }, []);
 
   const recipesByState: Record<UserState, Recipe[]> = {
     NT: [
@@ -126,12 +136,52 @@ export const Recipes = ({ userState, handleStep, step, steps }: RecipesProps) =>
       image: '/images/recipe-image.jpg' 
     },
   ];
+
   const recipes = recipesByState[userState] || [];
+
+
+  const smallScreenLayout = (
+    <ul className="grid items-center justify-center pt-1 grid-cols-2 gap-2">
+      {recipes.map((recipe, index) => (
+        <div key={index} className="bg-white rounded-md">
+        <div className="relative w-full h-[120px] mb-4">
+          <Image
+            src={recipe.image}
+            alt={recipe.name}
+            layout="fill"
+            objectFit="cover"
+            className="rounded-t-lg"
+          />
+        </div>
+        <div className="h-[130px] ">
+        <h3 className="text-sm md:text-xl font-semibold text-black px-3">{recipe.name}</h3>
+        <p className="text-gray-600 text-sm mt-2 px-3">{recipe.description}</p>
+        </div>
+      </div>
+      ))}
+    </ul>
+  );
+
+  const largeScreenLayout = (
+    <ul className=" grid items-center grid-cols-3 gap-2">
+      {recipes.map((recipe, index) => (
+        <li key={index} className="relative mb-[140px] flex flex-col justify-center items-center p-3">
+          <div className="relative w-[200px] h-[200px] mb-6">
+            <Image src={recipe.image} alt={recipe.name} layout="fill" objectFit="cover" className="rounded-full z-10" />
+          </div>
+          <div className="absolute top-[270px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8/12 bg-white p-8 rounded-xl shadow-md">
+            <h2 className="text-xl font-semibold text-black">{recipe.name}</h2>
+            <p className="text-gray-600 text-sm pt-2">{recipe.description}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  );
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center">
         <div className="relative w-full h-[200px]">
-            <h1 className="absolute top-4 left-[60px] text-white text-[60px] font-bold z-10">Fish Recipes</h1>
+            <h1 className="absolute top-4 left-[30px] text-[40px] md:left-[60px] text-white md:text-[60px] font-bold z-10">Fish Recipes</h1>
             <Image
               src="/images/species-banner.jpg"
               alt="Fishing"
@@ -141,22 +191,22 @@ export const Recipes = ({ userState, handleStep, step, steps }: RecipesProps) =>
             />
         </div>
         <div className="w-screen bg-gray-900 flex items-center justify-between p-[10px]">
-          <div onClick={() => handleStep(0)} className="flex items-center">
+          <div onClick={() => handleStep(0)} className="flex items-center pr-2">
           <FaArrowLeft color="white" size={20} />
           </div>
           <input
              type="text"
-             placeholder="Search Recipes..."
+             placeholder="Search Tips..."
              value={searchedRecipes}
              onChange={(e) => setSearchedRecipes(e.target.value)}
              className=" bg-gray-600 px-2 py-2 w-5/12 text-black text-sm rounded-md"
            />
-          <div className="flex w-5/12 rounded-lg bg-gray-50">
+          <div className="flex w-7/12 rounded-lg ml-1 bg-gray-50">
             {steps.map((stepData) => (
               <button
                 key={stepData.step}
                 onClick={() => handleStep(stepData.step)}
-                className={`p-1 px-6 text-base w-1/3 ${
+                className={`p-1 md:px-6 w-1/3 text-sm md:text-base ${
                   step === stepData.step ? 'text-white bg-[#636AE8FF] rounded-lg' : 'text-black'
                 }`}
               >
@@ -164,16 +214,16 @@ export const Recipes = ({ userState, handleStep, step, steps }: RecipesProps) =>
               </button>
             ))}
           </div>
-          <div className="w-8"></div>
+          <div className="hidden md:w-8"></div>
         </div>
-    <div className="w-screen p-[70px]">
+    <div className="w-screen pt-6 md:p-[70px]">
       <div className="w-full flex flex-col justify-center items-center px-[30px]">
-      <h2 className="text-5xl w-full font-bold text-start text-black mb-2 px-[100px]">Top Recipes</h2>
-      <p className="text-gray-600 w-full text-start  text-sm tracking-tight px-[100px]">Try the best fish recipes the community has to offer!</p>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-10 pt-[50px] px-[100px]">
+      <h2 className="text-2xl md:text-5xl w-full font-bold md:text-start text-black mb-2 md:px-[100px]">Top Recipes</h2>
+      <p className="text-gray-600 w-full md:text-start  text-sm tracking-tight md:px-[100px]">Try the best fish recipes the community has to offer!</p>
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-2 pt-4 md:gap-10 md:pt-[50px] md:px-[100px] w-full">
         {topRecipes.map((recipe, index) => (
           <div key={index} className="bg-white rounded-md">
-            <div className="relative w-full h-[200px] mb-4">
+            <div className="relative w-full h-[120px] md:h-[200px] mb-4">
               <Image
                 src={recipe.image}
                 alt={recipe.name}
@@ -182,41 +232,16 @@ export const Recipes = ({ userState, handleStep, step, steps }: RecipesProps) =>
                 className="rounded-t-lg"
               />
             </div>
-            <div className="h-[180px]">
-            <h3 className="text-xl font-semibold text-black px-3">{recipe.name}</h3>
+            <div className="h-[120px] md:h-[180px]">
+            <h3 className="text-sm md:text-xl font-semibold text-black px-3">{recipe.name}</h3>
             <p className="text-gray-600 text-sm mt-2 px-3">{recipe.description}</p>
             </div>
           </div>
         ))}
       </div>
     </div>
-    <h1 className="text-4xl w-full font-bold text-center text-black mt-[60px]">Recipes</h1>
-      {recipes.length > 0 ? (
-        <ul className="space-y-[20px] grid items-center grid-cols-4 gap-2">
-        {recipes.map((recipe, index) => (
-          <li key={index} className="relative pb-[100px] flex flex-col justify-center items-center p-4">
-            <div className="relative w-[150px] h-[150px] mb-4">
-              <Image
-                src={recipe.image}
-                alt={recipe.name}
-                layout="fill"
-                objectFit="cover"
-                className="rounded-[300px] z-10"
-              />
-            </div>
-            <div className="absolute text-start top-[200px] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10/12 bg-white p-6 min-h-[250px] rounded-xl shadow-md">
-              <h2 className="text-xl font-semibold text-black pt-[70px]">{recipe.name}</h2>
-              <p className="text-gray-600 text-sm pt-2">{recipe.description}</p>
-              <div className="w-full flex justify-end z-10">
-                <button className="bg-slate-300 text-[#636AE8FF] text-xs rounded-xl font-semibold px-4 py-1">details</button>
-              </div>
-            </div>
-          </li>
-        ))}
-      </ul>
-      ) : (
-        <p>No recipes available for this region.</p>
-      )}
+    <h1 className="text-4xl w-full font-bold text-center text-black my-[40px]">Recipes</h1>
+    {isSmallScreen ? smallScreenLayout : largeScreenLayout}
     </div>
     </div>
   );

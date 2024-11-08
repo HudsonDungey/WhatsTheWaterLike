@@ -26,8 +26,8 @@ export const FishIndepth = ({ stepAlt, setStepAlt, selectedFish }: IndepthProps)
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center pb-[20px]">
-      <div className="relative w-full h-[300px]">
-        <h1 className="absolute top-4 left-[60px] text-white text-[60px] font-bold z-10">{selectedFish.name}</h1>
+      <div className="relative w-full h-[100px] md:h-[300px]">
+        <h1 className="absolute top-4 left-[40px] md:left-[60px] text-white text-[40px] md:text-[60px] font-bold z-10">{selectedFish.name}</h1>
         <Image
           src={`/images/${selectedFish.name}-banner.jpg`}
           alt="Fishing"
@@ -41,7 +41,7 @@ export const FishIndepth = ({ stepAlt, setStepAlt, selectedFish }: IndepthProps)
           <FaArrowLeft color="white" size={20} />
           </div>
       </div>
-      <div className="mt-[40px] w-8/12 bg-white rounded-lg">
+      <div className="mt-[15px] md:mt-[40px] w-10/12 md:w-8/12 bg-white rounded-lg">
        <p className="text-black tracking-tight text-base text-start p-3">
          Barramundi are a top catch for anglers in northern Australia, 
          known for their strong fight and great taste. 
@@ -55,30 +55,29 @@ export const FishIndepth = ({ stepAlt, setStepAlt, selectedFish }: IndepthProps)
       </div>
 
     <div>
-      <div className="p-[40px] w-full flex flex-row items-center gap-x-10 justify-center">
+      <div className="p-[20px] md:p-[40px] w-full flex flex-row items-center gap-x-4 md:gap-x-10 justify-center">
         <Image
           src={selectedFish.imageUrl}
           alt={selectedFish.name}
-          width={250}
-          height={250}
+          width={230}
+          height={230}
         />
         <div>
           <div className="flex items-center space-x-4 mt-1">
-            <p className="text-2xl font-semibold text-gray-900">Eating Rating</p>
+            <p className="text-base md:text-2xl font-semibold text-gray-900">Eating Rating</p>
             {renderStars(selectedFish.eatingRating)}
           </div>
           <div className="flex items-center space-x-4 mt-1">
-            <p className="text-2xl font-semibold text-gray-900">Fight Rating</p>
+            <p className="text-base md:text-2xl font-semibold text-gray-900">Fight Rating</p>
             {renderStars(selectedFish.fightingRating)}
           </div>
           </div>
         </div>
     </div>
 
-    <div className="grid grid-cols-5 justify-center items-center px-[60px]">
+    <div className="flex flex-col md:grid md:grid-cols-5 justify-center items-center md:px-[60px]">
       <div className="col-span-3 col-start-1 w-full space-y-[40px]">
-
-        <div className="bg-white rounded-xl text-start p-8">
+        <div className="bg-white rounded-xl text-start p-8 mx-3">
             <h1 className="text-black font-bold tracking-tight pl-2 pb-[20px]">Where to fish for {selectedFish.name}</h1>
             <p className="text-sm text-gray-700 w-8/12">Barramundi migrate from freshwater rivers to coastal estuaries during the wet season,
                 often coinciding with warmer months,
@@ -93,7 +92,7 @@ export const FishIndepth = ({ stepAlt, setStepAlt, selectedFish }: IndepthProps)
    
          </div>
 
-         <div className="col-span-3 col-start-1 w-full">
+         <div className="col-span-3 col-start-1 w-full mx-3">
          <div className="bg-white rounded-xl text-start p-8">
             <h1 className="text-black font-bold tracking-tight pl-2 pb-[20px]">How to catch {selectedFish.name}</h1>
             <p className="text-sm text-gray-700 w-8/12">
@@ -121,7 +120,7 @@ export const FishIndepth = ({ stepAlt, setStepAlt, selectedFish }: IndepthProps)
           </div>
         </div>
 
-        <div className="bg-white rounded-xl text-start p-8">
+        <div className="bg-white rounded-xl text-start p-8 mx-3">
             <h1 className="text-black font-bold tracking-tight pl-2 pb-[20px]">Size and Weight</h1>
             <p className="text-sm text-gray-700 w-10/12">
                 Barramundi can vary widely in size, typically ranging from 40 to 120 cm (16 to 47 inches) in length,
@@ -131,11 +130,12 @@ export const FishIndepth = ({ stepAlt, setStepAlt, selectedFish }: IndepthProps)
             </p>
         </div>
       </div>
-      <div className="col-span-2">
+      <div className="col-span-2 mt-10 md:mt-0">
+        <h1 className="md:hidden font-bold text-2xl pb-3"> Habitats for {selectedFish.name}</h1>
       {selectedFish.habitats.map((habitat: string, index: number) => (
               <li
                 key={index}
-                className="bg-gray-100 p-4 justify-center items-center rounded-md flex flex-col"
+                className="bg-gray-100 md:p-4 justify-center items-center rounded-md flex flex-col"
               >
                 <h3 className="text-xl font-bold text-gray-900">{habitat}</h3>
                 <Image
@@ -148,7 +148,7 @@ export const FishIndepth = ({ stepAlt, setStepAlt, selectedFish }: IndepthProps)
             ))}
       </div>
     </div>
-    <div className="w-8/12 bg-white flex flex-col justify-center items-start p-[20px] mt-[30px] rounded-2xl">
+    <div className="w-8/12 bg-white flex flex-col justify-center items-start p-[20px] md:mt-[30px] rounded-2xl">
        <h1 className="font-bold">Size Regulations</h1>
        <div className="w-full max-w-[400px] mt-4">
         <h1 className="text-sm font-bold text-start">Minimum size: {size}cm</h1>
