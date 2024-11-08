@@ -22,6 +22,7 @@ export const FishIndepth = ({ stepAlt, setStepAlt, selectedFish }: IndepthProps)
   const size = 55 // change later
   const maxSize = 130; 
   const percentage = (size / maxSize) * 100;
+  console.log(selectedFish.imageUrl)
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center pb-[20px]">
