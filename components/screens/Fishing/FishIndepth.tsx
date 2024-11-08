@@ -42,7 +42,7 @@ export const FishIndepth = ({ stepAlt, setStepAlt, selectedFish }: IndepthProps)
           </div>
       </div>
       <div className="mt-[15px] md:mt-[40px] w-10/12 md:w-8/12 bg-white rounded-lg">
-       <p className="text-black tracking-tight text-base text-start p-3">
+       <p className="text-black tracking-tight text-base md:text-start p-3">
          Barramundi are a top catch for anglers in northern Australia, 
          known for their strong fight and great taste. 
          These fish are true survivors, moving between 
@@ -92,7 +92,7 @@ export const FishIndepth = ({ stepAlt, setStepAlt, selectedFish }: IndepthProps)
    
          </div>
 
-         <div className="col-span-3 col-start-1 w-full mx-3">
+         <div className="col-span-3 col-start-1 w-12/12 mx-3">
          <div className="bg-white rounded-xl text-start p-8">
             <h1 className="text-black font-bold tracking-tight pl-2 pb-[20px]">How to catch {selectedFish.name}</h1>
             <p className="text-sm text-gray-700 w-8/12">
