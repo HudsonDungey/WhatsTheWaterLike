@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { registerUser, loginUser, logoutUser } from '~/lib/authConfig'; // Adjust the import path
 import { useAccountContext } from '~/utils/AccountContext';
+import { useRouter } from 'next/navigation';
 import { LoadingSpinner } from '~/components';
 import { AccountDetails } from '~/types/mainTypes';
 import { activities, countries } from '~/lib/activities&countries';
@@ -10,6 +11,7 @@ type LoginTypes = {
 };
 
 export const Login = ({ handleAccountClick }: LoginTypes) => {
+  const router = useRouter();
   const { clearAccount, setAccount } = useAccountContext();
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [isCountryDropdownVisible, setIsCountryDropdownVisible] = useState(false);
@@ -45,10 +47,10 @@ export const Login = ({ handleAccountClick }: LoginTypes) => {
   // Handle sign-in
   const handleSignIn = async () => {
     setIsLoading(true);
+    router.push("/profile");
     try {
       const { user, data } = await loginUser(email, password);
   
-      // Create an AccountDetails object to match the expected type
       const accountDetails: AccountDetails = {
         uid: user.uid,
         email: user.email,
@@ -58,7 +60,7 @@ export const Login = ({ handleAccountClick }: LoginTypes) => {
         country: data?.country || null,
         mainActivity: data?.mainActivity || null,
       };
-  
+     
       setAccount(accountDetails);
       handleAccountClick?.();
       setIsLoading(false);

@@ -63,10 +63,21 @@ import { QueryParams, Credentials } from "~/types/query";
   export const getDateInfo = (daysOffset: number) => {
     const date = new Date();
     date.setDate(date.getDate() + daysOffset); 
-
-    // Get day of the month and day abbreviation
     const dayOfMonth = date.getDate();
     const dayAbbreviation = date.toLocaleString('en-US', { weekday: 'short' }).toUpperCase();
 
     return { dayOfMonth, dayAbbreviation };
   };
+
+
+  export const convertTimestampToDate = (timestampSeconds: number): string => {
+    const date = new Date(timestampSeconds * 1000);
+  
+    return date.toLocaleString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour12: true,
+    });
+  };
+  

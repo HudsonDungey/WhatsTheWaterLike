@@ -84,7 +84,7 @@ export const FishIndepth = ({ stepAlt, setStepAlt, selectedFish }: IndepthProps)
                 to spawn and take advantage of nutrient-rich waters.
             </p>
             <ul className="list-disc pl-7 pt-[20px] space-y-2">
-             <li className="text-sm text-black"><span className="font-semibold text-black text-sm pr-3">Brackish waters:</span>Thive in environments with a mix of fresha and salt water.</li>
+             <li className="text-sm text-black"><span className="font-semibold text-black text-sm pr-3">Brackish waters:</span>Thive in environments with a mix of fresh and salt water.</li>
              <li className="text-sm text-black"><span className="font-semibold text-black text-sm pr-3">Mangrove swamps:</span>Found in mangroves, which provide shelter and feeding grounds.</li>
              <li className="text-sm text-black"><span className="font-semibold text-black text-sm pr-3">Estuarine lagoons:</span>Utilize lagoons in estuarires for protection and feeding</li>
              <li className="text-sm text-black"><span className="font-semibold text-black text-sm pr-3">Tidal flats:</span>Often found in tidal flats, especially in coastal areas.</li>

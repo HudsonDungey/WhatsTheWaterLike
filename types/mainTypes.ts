@@ -1,3 +1,5 @@
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
+
 export type FishingSpot = {
     id: string;
     name: string;
@@ -7,7 +9,11 @@ export type FishingSpot = {
     };
     activity?: string;
     description?: string; 
-    timestamp?: string
+    timestamp: {
+      seconds: number;
+      milliseconds: number;
+    }
+    imageUrl: string | StaticImport;
 };
   
 export interface AccountDetails {

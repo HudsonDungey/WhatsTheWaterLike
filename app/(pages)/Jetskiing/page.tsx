@@ -54,83 +54,73 @@ const Jetskiing = () => {
       </div>
       
       <div className="mx-auto h-[390px] md:h-[600px] px-[50px] py-2 flex flex-col md:grid md:grid-cols-12 gap-8">
-        <div className="bg-white col-span-12 shadow-md rounded-lg p-1 mb-[100px]">
-          <h2 className="text-xl md:text-3xl pl-6 pt-4 text-start font-semibold text-gray-700">PWC Conditions</h2>
-          <p className="text-lg md:text-2xl pl-6 text-start font-semibold text-gray-700">Darwin Harbour</p>
-          <p className="text-sm md:text-xl pl-6 text-start font-semibold text-gray-700">{currentDate}</p>
-          <h1 className="text-red-600 md:pl-6 pt-6 mb-2 text-[20px] md:text-[40px] font-bold">Getting Crap</h1>
-          <div className="flex flex-col items-center justify-center">
-            <div className="relative w-[140px] h-[140px] md:w-[200px] md:h-[200px] rounded-full bg-gray-200">
-              <div
-                className="absolute top-0 left-0 w-full h-full rounded-full"
-                style={{
-                  padding: '50px',
-                  background: `conic-gradient(#636AE8FF ${conditionsPercent}%, #e5e7eb ${conditionsPercent}%)`,
-                }}
-              />
-              <div className="absolute top-3 left-3 right-3 bottom-3 bg-white rounded-full"></div>
-              <div className="absolute inset-0 flex items-center justify-center text-3xl font-bold text-blue-600">
-                {conditionsPercent}%
-              </div>
-            </div>
-            <div className="flex mt-4">
-              {[...Array(5)].map((_, index) => (
-                <FaStar
-                  key={index}
-                  className={`text-4xl ${index < Math.round(conditionsPercent / 20) ? 'text-yellow-400' : 'text-gray-300'}`}
-                />
-              ))}
-            </div>
-          </div>
-          <div className="hidden md:block w-full">
-            <h1 className="w-full mt-[25px] p-2 leading-tight text-sm rounded-[10px] flex flex-row justify-center items-center gap-2 bg-[#636AE8FF]">
-              <FaRegCalendarAlt size={20} /> Select Date
-            </h1>
-            <div className="flex px-[5px] space-x-2 justify-between pt-2">
-              {[0, 1, 2, 3, 4].map((daysOffset) => {
-                const { dayOfMonth, dayAbbreviation } = getDateInfo(daysOffset);
-                return (
-                  <div
-                    key={daysOffset}
-                    className="bg-gray-200 text-sm text-gray-900 flex flex-col rounded-lg justify-center items-center w-2/12 p-2"
-                  >
-                    <span className="font-medium text-black text-lg">{dayOfMonth}</span>
-                    <span className="text-base text-gray-800">{dayAbbreviation}</span>
+                <div className="bg-white col-span-8 shadow-md rounded-lg p-1 mb-[100px]">
+                  <h2 className="text-xl md:text-3xl pl-6 pt-4 text-start font-semibold text-gray-700">PWC Conditions</h2>
+                  <p className="md:text-2xl pl-6 text-start font-semibold text-gray-700">Darwin Harbour</p>
+                  <p className=" text-sm md:text-xl pl-6 text-start md:font-semibold text-gray-700">{currentDate}</p>
+                  <h1 className='text-green-600 md:pl-6 pt-6 md:text-start mb-2 text-[20px] md:text-[40px] font-bold'>GOOD</h1>
+                  <div className="flex flex-col items-center justify-center">
+                    <div className="relative w-[140px] h-[140px] md:w-[200px] md:h-[200px] rounded-full bg-gray-200">
+                      <div
+                        className="absolute top-0 left-0 w-full h-full rounded-full"
+                        style={{
+                          padding: '50px',
+                          background: `conic-gradient(#636AE8FF 75%, #e5e7eb 75%)`,
+                        }}
+                      />
+                      <div className="absolute top-3 left-3 right-3 bottom-3 bg-white rounded-full"></div>
+                      <div className="absolute inset-0 flex items-center justify-center text-3xl font-bold text-blue-600">
+                        75%
+                      </div>
+                    </div>
+                    <div className="flex mt-4">
+                      {[...Array(5)].map((_, index) => (
+                        <FaStar
+                          key={index}
+                          className={`text-4xl ${index < Math.round(75 / 20) ? 'text-yellow-400' : 'text-gray-300'}`}
+                        />
+                      ))}
+                    </div>
                   </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
+                  <div className="hidden md:block w-full">
+                    <h1 className="w-full mt-[25px] p-2 leading-tight text-sm rounded-[10px] flex flex-row justify-center items-center gap-2 bg-[#636AE8FF]">
+                      <FaRegCalendarAlt size={20} /> Select Date
+                    </h1>
+                    <div className="flex px-[5px] space-x-2 justify-between pt-2">
+                      {[0, 1, 2, 3, 4].map((daysOffset) => {
+                        const { dayOfMonth, dayAbbreviation } = getDateInfo(daysOffset);
+                        return (
+                          <div
+                            key={daysOffset}
+                            className="bg-gray-200 text-sm text-gray-900 flex flex-col rounded-lg justify-center items-center w-2/12 p-2"
+                          >
+                            <span className="font-medium text-black text-lg">{dayOfMonth}</span>
+                            <span className="text-base text-gray-800">{dayAbbreviation}</span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
 
-        <div className="hidden md:block bg-white col-span-6 shadow-md rounded-lg p-4">
-          <div className="flex items-center justify-between pb-2">
-            <h2 className="text-lg font-semibold text-black">PWC Locations</h2>
-            <div className="flex items-center border border-gray-300 bg-gray-200 rounded-lg px-4 py-2">
-              <FaSearch className="text-gray-500 mr-2 text-sm" />
-              <input
-                type="text"
-                placeholder="Search location"
-                className="focus:outline-none bg-gray-200 text-gray-700 text-sm w-full"
-              />
-            </div>
-            <button 
-              className="text-sm border px-2 py-1 rounded-lg shadow-md border-gray-300 text-black font-medium"
-              onClick={toggleSpots}
-            >
-              {hideSpots ? "Show Saved Locations" : "Hide Saved Locations"}
-            </button>
-          </div>
-          <div className="relative h-64 mt-4">
-            <MapComponent
-              longitude={130.8334} 
-              latitude={-12.4578} 
-              showSpots={!hideSpots} 
-              fishingSpots={!hideSpots ? spots : []} 
-            />
-          </div>
-        </div>
-      </div>
+
+                <div className="md:col-span-4 flex flex-col">
+                <div className="hidden md:flex bg-white col-span-6 shadow-md mt-[15px] rounded-lg p-4 flex-col space-y-4">
+                 <div className="relative h-64 mt-4">
+                   <MapComponent
+                     longitude={130.8334}
+                     latitude={-12.4578}
+                   />
+                 </div>
+                 <button
+                   onClick={() => router.push('/Map')}
+                   className="text-sm border px-1 py-1 mt-2 rounded-[4px] flex flex-row items-center text-center justify-center shadow-md border-gray-300 text-black font-medium"
+                 >
+                   Click here to open map full size
+                 </button>
+               </div>
+                </div>
+              </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-8 p-4 pt-10 md:p-12">
         {[

@@ -3,7 +3,7 @@ import { AustralianState, speciesType } from "~/types/mainTypes";
 export const speciesByState: Record<AustralianState, speciesType[]> = {
     '': [],
     NT: [
-      { name: 'Barramundi', eatingRating: 5, fightingRating: 4, imageUrl: '/images/fish-img.png', habitats: ['Estuary', 'Coast', 'Billabong'], },
+      { name: 'Barramundi', eatingRating: 5, fightingRating: 4, imageUrl: 'https://whatsthewaterlike.s3.ap-southeast-2.amazonaws.com/fishpngs/barramundi.png', habitats: ['Estuary', 'Coast', 'Billabong'], },
       { name: 'Mackerel', eatingRating: 4, fightingRating: 5, imageUrl: '/images/fish-img.png', habitats: ['Estuary', 'Coast', 'Billabong'], },
       { name: 'Threadfin Salmon', eatingRating: 4, fightingRating: 3, imageUrl: '/images/fish-img.png', habitats: ['Estuary', 'Coast', 'Billabong'], },
       { name: 'Mangrove Jack', eatingRating: 5, fightingRating: 4, imageUrl: '/images/fish-img.png', habitats: ['Estuary', 'Coast', 'Billabong'], },
@@ -73,7 +73,7 @@ export const speciesByState: Record<AustralianState, speciesType[]> = {
     QLD: [
         { name: 'Coral Trout', eatingRating: 5, fightingRating: 4, imageUrl: '/images/fish-img.png', habitats: ['Estuary', 'Coast', 'Billabong'], },
         { name: 'Spanish Mackerel', eatingRating: 4, fightingRating: 5, imageUrl: '/images/fish-img.png', habitats: ['Estuary', 'Coast', 'Billabong'], },
-        { name: 'Barramundi', eatingRating: 5, fightingRating: 4, imageUrl: '/images/fish-img.png', habitats: ['Estuary', 'Coast', 'Billabong'], },
+        { name: 'Barramundi', eatingRating: 5, fightingRating: 4, imageUrl: 'https://whatsthewaterlike.s3.ap-southeast-2.amazonaws.com/fishpngs/barramundi.png', habitats: ['Estuary', 'Coast', 'Billabong'], },
         { name: 'Mangrove Jack', eatingRating: 5, fightingRating: 4, imageUrl: '/images/fish-img.png', habitats: ['Estuary', 'Coast', 'Billabong'], },
         { name: 'Giant Trevally', eatingRating: 2, fightingRating: 5, imageUrl: '/images/fish-img.png', habitats: ['Estuary', 'Coast', 'Billabong'],},
         { name: 'Red Emperor', eatingRating: 5, fightingRating: 4, imageUrl: '/images/fish-img.png', habitats: ['Estuary', 'Coast', 'Billabong'], },

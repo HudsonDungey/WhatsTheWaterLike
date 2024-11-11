@@ -218,10 +218,10 @@ const Home = () => {
        <div className="w-full sm:w-10/12 bg-pink-50 mt-4 p-[50px] md:min-h-[340px] flex flex-col sm:flex-row rounded-xl">
           <div className="w-full sm:w-5/12 text-start mb-4 sm:mb-0"> 
             <h1 className="font-semibold">Community</h1>
-            <p className="text-sm leading-snug">Sint occaecat deserunt aliquip do occaecat ut quis. Cupidatat magna fugiat quis sit duis est in volup</p>
-            <p className="text-sm leading-snug mt-5 sm:mt-20 flex flex-row items-center justify-center gap-x-2"> 
+            <p className="text-sm leading-snug">Chat to the community, Get involved, Learn more.</p>
+            <button className="text-sm leading-snug mt-5 sm:mt-20 flex flex-row justify-center items-center gap-x-2"> 
               <FaArrowLeft color="black" /> View community
-            </p>
+            </button>
           </div>  
           <div className="w-full hidden sm:w-7/12 gap-x-3 md:flex sm:flex-row flex-col px-[30px] justify-center items-center min-h-[300px]">
             <div className="col-span-1 h-full hidden md:flex items-end mb-4 sm:mb-0">
@@ -248,9 +248,9 @@ const Home = () => {
 
         <div className='w-10/12 bg-blue-50 mt-4 p-[50px] md:min-h-[340px] flex flex-row rounded-xl'>
           <div className="w-5/12 text-start"> 
-          <h1 className="font-semibold">Community</h1>
-          <p className="text-sm leading-snug">Sint occaecat deserunt aliquip do occaecat ut quis. Cupidatat magna fugiat quis sit duis est in volup</p>
-          <p className="text-sm leading-snug mt-20 flex flex-row items-center justify-center gap-x-2"> <FaArrowLeft color='black'/> View community</p>
+          <h1 className="font-semibold">News</h1>
+          <p className="text-sm leading-snug">Get to know what is going on with our tailor-made news.</p>
+          <button className="text-sm leading-snug mt-20 flex flex-row gap-x-2 justify-center items-center"> <FaArrowLeft color='black'/> View News</button>
           </div>  
           <div className="w-7/12 grid grid-cols-3 px-[30px] min-h-[300px]">
           <div className="col-span-1 h-full hidden md:flex items-end">
