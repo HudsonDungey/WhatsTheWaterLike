@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useRouter } from "next/router";
 import Image from 'next/image';
 import MapGL, { ViewStateChangeEvent, Marker } from 'react-map-gl';
 import { FaMapMarkerAlt, FaCamera } from "react-icons/fa";
@@ -9,6 +10,7 @@ import { addFishingSpot, getFishingSpots } from '~/lib/fishingLocations';
 import { FishingSpot } from '~/types/mainTypes';
 
 const Map = () => {
+    const router = useRouter();
     const [query, setQuery] = useState('');  
     const [searchResults, setSearchResults] = useState<any[]>([]);  
     const [showLatitude, setShowLatitude] = useState(-12.4578); 
@@ -20,6 +22,16 @@ const Map = () => {
     const [info, setInfo] = useState("");
     const [savedLat, setSavedLat] = useState("");
     const [savedLong, setSavedLong] = useState("");
+
+    useEffect(() => {
+        if (router.query.lat && router.query.lng) {
+          const lat = parseFloat(router.query.lat as string);
+          const lng = parseFloat(router.query.lng as string);
+          setSavedLat(lat.toString())
+          setSavedLong(lng.toString())
+          router.replace("/map", undefined, { shallow: true });
+        }
+      }, [router.query]);
 
     const [options, setOptions] = useState({
         showRadar: false,

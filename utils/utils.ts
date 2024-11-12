@@ -75,7 +75,7 @@ import { QueryParams, Credentials } from "~/types/query";
   
     return date.toLocaleString('en-US', {
       year: 'numeric',
-      month: 'long',
+      month: 'short',
       day: 'numeric',
       hour12: true,
     });

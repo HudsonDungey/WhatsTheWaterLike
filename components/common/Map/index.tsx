@@ -23,6 +23,7 @@ interface FishingSpot {
 
 interface MapProps {
   fishingSpots?: FishingSpot[];
+  spot?: Location;
   latitude: number;
   longitude: number;
   showSpots?: boolean;
@@ -33,6 +34,7 @@ interface MapProps {
 
 const MapComponent: React.FC<MapProps> = ({
   fishingSpots = [],
+  spot,
   latitude,
   longitude,
   airports,
