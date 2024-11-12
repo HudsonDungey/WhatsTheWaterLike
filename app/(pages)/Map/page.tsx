@@ -8,10 +8,35 @@ import { FaMapMarkerAlt, FaCamera } from "react-icons/fa";
 import 'mapbox-gl/dist/mapbox-gl.css'; 
 import { addFishingSpot, getFishingSpots } from '~/lib/fishingLocations';
 import { FishingSpot } from '~/types/mainTypes';
+import { LoadingSpinner } from '~/components';
 
-const Map = () => {
+const MapContent = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
+    const [urlLocation, setUrlLocation] = useState({ lat: 0, lng: 0 });
+
+    useEffect(() => {
+        const lat = searchParams.get("lat");
+        const lng = searchParams.get("lng");
+        if (lat && lng) {
+            setUrlLocation({ lat: parseFloat(lat), lng: parseFloat(lng) });
+            router.replace("/Map");  // Removes coordinates from the URL
+        }
+    }, [searchParams, router]);
+
+    return (
+        <Marker
+            key={urlLocation.lat}
+            longitude={urlLocation.lng}
+            latitude={urlLocation.lat}
+            anchor="bottom"
+        >
+            <FaMapMarkerAlt color="red" size={32} />
+        </Marker>
+    );
+};
+
+const Map = () => {
     const [query, setQuery] = useState('');  
     const [searchResults, setSearchResults] = useState<any[]>([]);  
     const [showLatitude, setShowLatitude] = useState(-12.4578); 
@@ -23,16 +48,6 @@ const Map = () => {
     const [info, setInfo] = useState("");
     const [savedLat, setSavedLat] = useState("");
     const [savedLong, setSavedLong] = useState("");
-    const [urlLocation, setUrlLocation] = useState({lat: 0, lng: 0})
-
-    useEffect(() => {
-        const lat = searchParams.get("lat");
-        const lng = searchParams.get("lng");
-        if (lat && lng) {
-            setUrlLocation({ lat: parseFloat(lat), lng: parseFloat(lng) });
-            router.replace("/Map");
-        }
-      }, [searchParams, router]);
 
     const [options, setOptions] = useState({
         showRadar: false,
@@ -137,15 +152,15 @@ const Map = () => {
 
     return (
       <div className="w-screen min-h-screen bg-gray-100 flex flex-col">
-        <Suspense fallback={<p>Loading map...</p>}>
           <div className="relative w-screen h-[400px] md:h-[700px] rounded-2xl p-[5px] md:p-[40px] ">
+          <Suspense fallback={<LoadingSpinner color="baby-blue"/>}>
               <MapGL
                   {...viewport}
                   mapStyle="mapbox://styles/mapbox/satellite-v9"
                   mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_API}
                   onMove={handleViewportChange}
               >
-
+                <MapContent /> 
                   {options.showBoatFishingSpots && fishingSpots.map((spot) => (
                       <Marker
                           key={spot.id}
@@ -156,17 +171,8 @@ const Map = () => {
                           <FaMapMarkerAlt color="red" size={32} />
                       </Marker>
                   ))}
-                  {urlLocation && (
-                      <Marker
-                          key={urlLocation.lat}
-                          longitude={urlLocation.lng}
-                          latitude={urlLocation.lat}
-                          anchor="bottom"
-                      >
-                          <FaMapMarkerAlt color="red" size={32} />
-                      </Marker>
-                  )}
               </MapGL>
+              </Suspense>
               <div className="absolute top-5 z-40 left-5 md:top-14 md:left-14 md:hidden">
                   <button 
                       className="bg-gray-800 text-xs text-white font-semibold py-[1px] px-[6px] rounded-sm"
@@ -365,7 +371,6 @@ const Map = () => {
               </div>
               </div>
           </div>
-          </Suspense>
       </div>
   );
 };
