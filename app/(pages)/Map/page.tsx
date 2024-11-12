@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { Suspense, useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from 'next/image';
 import MapGL, { ViewStateChangeEvent, Marker } from 'react-map-gl';
@@ -23,14 +23,14 @@ const Map = () => {
     const [info, setInfo] = useState("");
     const [savedLat, setSavedLat] = useState("");
     const [savedLong, setSavedLong] = useState("");
+    const [urlLocation, setUrlLocation] = useState({lat: 0, lng: 0})
 
-      useEffect(() => {
+    useEffect(() => {
         const lat = searchParams.get("lat");
         const lng = searchParams.get("lng");
         if (lat && lng) {
-            setSavedLat(lat.toString())
-            setSavedLong(lng.toString())
-          router.replace("/map");
+            setUrlLocation({ lat: parseFloat(lat), lng: parseFloat(lng) });
+            router.replace("/Map");
         }
       }, [searchParams, router]);
 
@@ -137,6 +137,7 @@ const Map = () => {
 
     return (
       <div className="w-screen min-h-screen bg-gray-100 flex flex-col">
+        <Suspense fallback={<p>Loading map...</p>}>
           <div className="relative w-screen h-[400px] md:h-[700px] rounded-2xl p-[5px] md:p-[40px] ">
               <MapGL
                   {...viewport}
@@ -144,7 +145,8 @@ const Map = () => {
                   mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_API}
                   onMove={handleViewportChange}
               >
-                  {fishingSpots.map((spot) => (
+
+                  {options.showBoatFishingSpots && fishingSpots.map((spot) => (
                       <Marker
                           key={spot.id}
                           longitude={spot.location.lng}
@@ -154,6 +156,16 @@ const Map = () => {
                           <FaMapMarkerAlt color="red" size={32} />
                       </Marker>
                   ))}
+                  {urlLocation && (
+                      <Marker
+                          key={urlLocation.lat}
+                          longitude={urlLocation.lng}
+                          latitude={urlLocation.lat}
+                          anchor="bottom"
+                      >
+                          <FaMapMarkerAlt color="red" size={32} />
+                      </Marker>
+                  )}
               </MapGL>
               <div className="absolute top-5 z-40 left-5 md:top-14 md:left-14 md:hidden">
                   <button 
@@ -353,6 +365,7 @@ const Map = () => {
               </div>
               </div>
           </div>
+          </Suspense>
       </div>
   );
 };
