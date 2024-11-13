@@ -10,22 +10,22 @@ type Spots = {
 
 export const FishingSpotTable = ({ fishingSpots }: Spots) => {
 
-    
+
     const handleShare = (spot: FishingSpot) => {
-        const shareText = `Check out this fishing spot: ${spot.name}! Located at (${spot.location.lat}, ${spot.location.lng})`;
+        const shareText = `Check out this ${spot.activity} spot: ${spot.name}!\n\nLocated at (${spot.location.lat}, ${spot.location.lng})`;
         const shareUrl = `https://whats-the-water-like.vercel.app/Map?lat=${spot.location.lat}&lng=${spot.location.lng}`;
         
         if (navigator.share) {
           navigator.share({
             title: "Fishing Spot",
-            text: shareText,
-            url: shareUrl,
+            text: `${shareText}\n\n${shareUrl}`,
           });
         } else {
-          navigator.clipboard.writeText(`${shareText}\n${shareUrl}`);
+          navigator.clipboard.writeText(`${shareText}\n\n${shareUrl}`);
           alert("Link copied to clipboard!");
         }
       };
+      
       
 
   return (
